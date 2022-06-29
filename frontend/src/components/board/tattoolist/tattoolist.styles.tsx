@@ -21,6 +21,10 @@ export const CategoryWrapper = styled.div`
   align-items: flex-start;
 
   margin-right: 100px;
+
+  position: fixed;
+  left: 180px;
+  top: 140px;
 `;
 
 export const CategoryTitle = styled.div`
@@ -62,6 +66,7 @@ export const OuterWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   overflow: hidden;
+  margin-left: 250px;
 `;
 
 export const SectionWrapper = styled.div``;

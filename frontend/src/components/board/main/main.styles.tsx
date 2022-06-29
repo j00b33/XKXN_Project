@@ -7,12 +7,12 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin-bottom: 40px;
+  margin-bottom: 80px;
 `;
 
 export const Banner = styled.div`
   width: 100%;
-  height: 340px;
+  height: 360px;
   background-color: black;
   margin-bottom: 46px;
 `;
