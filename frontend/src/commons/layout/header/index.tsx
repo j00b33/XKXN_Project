@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   align-items: center;
 
   border-bottom: 1px solid black;
+  z-index: 1000;
 `;
 
 const RightSide = styled.div`

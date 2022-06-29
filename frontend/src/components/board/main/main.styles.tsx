@@ -22,7 +22,7 @@ export const TextWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: 211px;
-  margin-top: 40px;
+  margin-top: 70px;
 `;
 
 export const BannerText = styled.div`

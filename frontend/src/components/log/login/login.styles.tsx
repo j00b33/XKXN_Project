@@ -88,6 +88,7 @@ export const Button = styled.div`
   font-weight: 400;
   font-size: 20px;
   border: 1px solid #000000;
+  cursor: pointer;
 
   :hover {
     background-color: black;
