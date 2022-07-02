@@ -21,6 +21,14 @@ export class Tattoo {
   @Field(() => Int)
   price: number;
 
+  @Column({ nullable: true })
+  @Field(() => String)
+  detail: string;
+
+  @Column({ default: false })
+  @Field(() => Boolean)
+  isSold: boolean;
+
   @CreateDateColumn()
   date: Date;
 }

@@ -2,6 +2,24 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Tattoo {
+  id: String!
+  name: String!
+  price: Int!
+  detail: String!
+  isSold: Boolean!
+}
+
 type Query {
-  fetchTattoos: String!
+  fetchTattoos: [Tattoo!]!
+}
+
+type Mutation {
+  createTattoo(createTattooInput: CreateTattooInput!): Tattoo!
+}
+
+input CreateTattooInput {
+  name: String!
+  price: Int!
+  detail: String!
 }
