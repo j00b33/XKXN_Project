@@ -1,4 +1,4 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 
 @InputType()
 export class CreateTattooInput {
@@ -8,21 +8,6 @@ export class CreateTattooInput {
   @Field(() => Int)
   price: number;
 
-  @Field(() => String, { nullable: true })
-  detail: string;
-
-  @Field()
-  period: string;
-
-  @Field()
-  region: string;
-
-  @Field(() => Int)
-  tattooGenreId: number;
-
   @Field(() => String)
-  size: string;
-
-  @Field(() => [String])
-  tattooTags: string[];
+  detail: string;
 }
