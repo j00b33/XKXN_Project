@@ -57,6 +57,10 @@ export default function TattooDetailContainer() {
     router.push("/board/tattooList");
   };
 
+  const onClickDetail = (el) => (event) => {
+    router.push(`/board/${event.currentTarget.id}`);
+  };
+
   console.log(data);
 
   const onClickLike = () => {
@@ -96,7 +100,12 @@ export default function TattooDetailContainer() {
           <D.RecentContentWrapper>
             {viewed &&
               viewed.map((el) => (
-                <D.RecentImg id={el.id} key={el.id} src={el.tattooImageUrl} />
+                <D.RecentImg
+                  id={el.id}
+                  key={el.id}
+                  src={el.tattooImageUrl}
+                  onClick={onClickDetail(el)}
+                />
               ))}
           </D.RecentContentWrapper>
         </D.RecentViewWrapper>

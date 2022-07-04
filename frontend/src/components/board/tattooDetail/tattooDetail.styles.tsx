@@ -56,6 +56,12 @@ export const RecentImg = styled.img`
   border: none;
 
   object-fit: cover;
+
+  cursor: pointer;
+  :hover {
+    filter: brightness(60%);
+  }
+  transition: 0.4s;
 `;
 
 export const Image = styled.img`
