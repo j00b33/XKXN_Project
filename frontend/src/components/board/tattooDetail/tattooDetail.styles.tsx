@@ -38,9 +38,31 @@ export const RecentViewTitle = styled.div`
   margin-top: 8px;
 `;
 
+export const RecentContentWrapper = styled.div`
+  width: 120px;
+  height: 510px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  border: none;
+`;
+
+export const RecentImg = styled.img`
+  width: 120px;
+  height: 120px;
+  border: none;
+
+  object-fit: cover;
+`;
+
 export const Image = styled.img`
   width: 550px;
   height: 570px;
+
+  object-fit: cover;
 `;
 
 export const InfoWrapper = styled.div`

@@ -65,4 +65,8 @@ export class Tattoo {
   @Column({ default: 0 })
   @Field(() => Int)
   likes: number;
+
+  @Column()
+  @Field(() => String)
+  tattooImageUrl: string;
 }

@@ -107,6 +107,8 @@ export const TattooImage = styled.img`
 
   overflow: auto;
   cursor: pointer;
+
+  object-fit: cover;
 `;
 
 export const TattooInfoWrapper = styled.div`

@@ -25,4 +25,7 @@ export class CreateTattooInput {
 
   @Field(() => Boolean)
   isPortfolio: boolean;
+
+  @Field(() => String)
+  tattooImageUrl: string;
 }

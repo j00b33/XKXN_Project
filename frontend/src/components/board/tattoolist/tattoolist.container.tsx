@@ -10,30 +10,8 @@ export const FETCH_TATTOOS = gql`
     fetchTattoos {
       id
       name
-      price
-      tattooGenre {
-        genre
-      }
-      tattooTags {
-        tag
-      }
-      date
-    }
-  }
-`;
-
-export const FETCH_TATTOO_WITH_GENRE = gql`
-  query fetchTattooWithGenre($tattooGenreId: Float!) {
-    fetchTattooWithGenre(tattooGenreId: $tattooGenreId) {
-      name
-      price
-      tattooGenre {
-        genre
-      }
-      tattooTags {
-        tag
-      }
-      date
+      likes
+      tattooImageUrl
     }
   }
 `;
@@ -41,21 +19,31 @@ export const FETCH_TATTOO_WITH_GENRE = gql`
 export default function TattooListContainer() {
   const [genreNum, setGenreNum] = useState(0);
 
-  const { data, loading } = useQuery(FETCH_TATTOOS);
-  const { data: genreData } = useQuery(FETCH_TATTOO_WITH_GENRE, {
-    variables: {
-      tattooGenreId: genreNum,
-    },
-  });
+  // const { data: genreData } = useQuery(FETCH_TATTOO_WITH_GENRE, {
+  //   variables: {
+  //     tattooGenreId: genreNum,
+  //   },
+  // });
 
-  const router = useRouter();
-  if (loading) {
-    return "Loading...";
-  }
+  const { data } = useQuery(FETCH_TATTOOS);
 
-  const onClickDetail = (event) => {
+  console.log(data);
+
+  const onClickDetail = (el) => (event) => {
+    // console.log(event.currentTarget.id);
+
+    const recentData = JSON.parse(localStorage.getItem("Recent View") || "[]");
+
+    if (!JSON.stringify(localStorage).includes(el.id)) {
+      recentData.push(el);
+    }
+
+    localStorage.setItem("Recent View", JSON.stringify(recentData));
+
     router.push(`/board/${event.currentTarget.id}`);
   };
+
+  const router = useRouter();
 
   const onClickOne = () => {
     setGenreNum(1);
@@ -155,83 +143,24 @@ export default function TattooListContainer() {
           <T.ContentTitle>New</T.ContentTitle>
           <T.DivisionLine />
           <T.ContentWrapper>
-            <T.SingleTattooBox>
-              <T.TattooImage src="/dummytattoo.png" />
-              <T.TattooInfoWrapper>
-                <T.TattooInfo>Dummy Data</T.TattooInfo>
-                <T.LikesWrapper>
-                  <T.LikeIcon>
-                    <FaRegHeart />
-                  </T.LikeIcon>
-                  <T.TattooInfo>13,257</T.TattooInfo>
-                </T.LikesWrapper>
-              </T.TattooInfoWrapper>
-            </T.SingleTattooBox>
-
-            <T.SingleTattooBox>
-              <T.TattooImage src="/dummytattoo.png" />
-              <T.TattooInfoWrapper>
-                <T.TattooInfo>Dummy Data</T.TattooInfo>
-                <T.LikesWrapper>
-                  <T.LikeIcon>
-                    <FaRegHeart />
-                  </T.LikeIcon>
-                  <T.TattooInfo>13,257</T.TattooInfo>
-                </T.LikesWrapper>
-              </T.TattooInfoWrapper>
-            </T.SingleTattooBox>
-
-            <T.SingleTattooBox>
-              <T.TattooImage src="/dummytattoo.png" />
-              <T.TattooInfoWrapper>
-                <T.TattooInfo>Dummy Data</T.TattooInfo>
-                <T.LikesWrapper>
-                  <T.LikeIcon>
-                    <FaRegHeart />
-                  </T.LikeIcon>
-                  <T.TattooInfo>13,257</T.TattooInfo>
-                </T.LikesWrapper>
-              </T.TattooInfoWrapper>
-            </T.SingleTattooBox>
-
-            <T.SingleTattooBox>
-              <T.TattooImage src="/dummytattoo.png" />
-              <T.TattooInfoWrapper>
-                <T.TattooInfo>Dummy Data</T.TattooInfo>
-                <T.LikesWrapper>
-                  <T.LikeIcon>
-                    <FaRegHeart />
-                  </T.LikeIcon>
-                  <T.TattooInfo>13,257</T.TattooInfo>
-                </T.LikesWrapper>
-              </T.TattooInfoWrapper>
-            </T.SingleTattooBox>
-
-            <T.SingleTattooBox>
-              <T.TattooImage src="/dummytattoo.png" />
-              <T.TattooInfoWrapper>
-                <T.TattooInfo>Dummy Data</T.TattooInfo>
-                <T.LikesWrapper>
-                  <T.LikeIcon>
-                    <FaRegHeart />
-                  </T.LikeIcon>
-                  <T.TattooInfo>13,257</T.TattooInfo>
-                </T.LikesWrapper>
-              </T.TattooInfoWrapper>
-            </T.SingleTattooBox>
-
-            <T.SingleTattooBox>
-              <T.TattooImage src="/dummytattoo.png" />
-              <T.TattooInfoWrapper>
-                <T.TattooInfo>Dummy Data</T.TattooInfo>
-                <T.LikesWrapper>
-                  <T.LikeIcon>
-                    <FaRegHeart />
-                  </T.LikeIcon>
-                  <T.TattooInfo>13,257</T.TattooInfo>
-                </T.LikesWrapper>
-              </T.TattooInfoWrapper>
-            </T.SingleTattooBox>
+            {data?.fetchTattoos?.map((el) => (
+              <T.SingleTattooBox key={el.id} id={el.id}>
+                <T.TattooImage
+                  id={el.id}
+                  onClick={onClickDetail(el)}
+                  src={el.tattooImageUrl ? el.tattooImageUrl : "/default.png"}
+                />
+                <T.TattooInfoWrapper>
+                  <T.TattooInfo>{el.name}</T.TattooInfo>
+                  <T.LikesWrapper>
+                    <T.LikeIcon>
+                      <FaRegHeart />
+                    </T.LikeIcon>
+                    <T.TattooInfo>{el.likes}</T.TattooInfo>
+                  </T.LikesWrapper>
+                </T.TattooInfoWrapper>
+              </T.SingleTattooBox>
+            ))}
           </T.ContentWrapper>
         </T.SectionWrapper>
       </T.OuterWrapper>

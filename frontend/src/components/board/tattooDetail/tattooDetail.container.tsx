@@ -8,7 +8,7 @@ import { AiOutlineCreditCard } from "react-icons/ai";
 import { MdOutlineCreditCardOff } from "react-icons/md";
 import { BsCheck2 } from "react-icons/bs";
 import * as D from "./tattooDetail.styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const FETCH_TATTOO = gql`
   query fetchTattoo($tattooId: String!) {
@@ -28,6 +28,7 @@ export const FETCH_TATTOO = gql`
       likes
       isSold
       isDone
+      tattooImageUrl
     }
   }
 `;
@@ -46,6 +47,7 @@ export default function TattooDetailContainer() {
 
   const [isLiked, setIsLiked] = useState(false);
   const [isDone, setIsDone] = useState(false);
+  const [viewed, setViewed] = useState([]);
 
   const { data } = useQuery(FETCH_TATTOO, {
     variables: { tattooId: String(router.query.tattooDetail) },
@@ -65,6 +67,17 @@ export default function TattooDetailContainer() {
     setIsDone(true);
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const recentData = JSON.parse(
+        localStorage.getItem("Recent View" || "[]")
+      );
+      setViewed(recentData);
+    }
+  }, []);
+
+  console.log("👀 Recent View:", viewed);
+
   return (
     <D.Wrapper>
       <Head>
@@ -80,8 +93,21 @@ export default function TattooDetailContainer() {
       <D.MainWrapper>
         <D.RecentViewWrapper>
           <D.RecentViewTitle>Recent</D.RecentViewTitle>
+          <D.RecentContentWrapper>
+            {viewed &&
+              viewed.map((el) => (
+                <D.RecentImg id={el.id} key={el.id} src={el.tattooImageUrl} />
+              ))}
+          </D.RecentContentWrapper>
         </D.RecentViewWrapper>
-        <D.Image src={"/dummytattoo.png"} />
+
+        <D.Image
+          src={
+            data?.fetchTattoo.tattooImageUrl
+              ? data?.fetchTattoo.tattooImageUrl
+              : "/default.png"
+          }
+        />
         <D.InfoWrapper>
           <D.Headers>
             {/* Header */}
