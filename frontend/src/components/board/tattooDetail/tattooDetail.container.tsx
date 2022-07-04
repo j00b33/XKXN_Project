@@ -61,8 +61,6 @@ export default function TattooDetailContainer() {
     router.push(`/board/${event.currentTarget.id}`);
   };
 
-  console.log(data);
-
   const onClickLike = () => {
     setIsLiked((prev) => !prev);
   };
@@ -79,8 +77,6 @@ export default function TattooDetailContainer() {
       setViewed(recentData);
     }
   }, []);
-
-  console.log("👀 Recent View:", viewed);
 
   return (
     <D.Wrapper>

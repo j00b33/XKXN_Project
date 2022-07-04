@@ -27,11 +27,7 @@ export default function TattooListContainer() {
 
   const { data } = useQuery(FETCH_TATTOOS);
 
-  console.log(data);
-
   const onClickDetail = (el) => (event) => {
-    // console.log(event.currentTarget.id);
-
     const recentData = JSON.parse(localStorage.getItem("Recent View") || "[]");
 
     if (!JSON.stringify(localStorage).includes(el.id)) {
