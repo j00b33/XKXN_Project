@@ -3,144 +3,61 @@ import * as U from "./upload.styles";
 export default function UploadPresenter(props) {
   return (
     <U.Wrapper>
-      <U.Title>Upload Tattoo</U.Title>
+      <U.MainWrapper>
+        <U.ImageBox>
+          <U.ImageInfoText> + Upload Image</U.ImageInfoText>
+        </U.ImageBox>
 
-      <U.DivisionLine />
-      <U.Body>
-        <U.Box>
-          <U.Text>Tattoo Tags</U.Text>
-          <U.LongInput
-            onChange={props.onChangeTags}
-            placeholder="ex) #flower, #birth"
-          />
-        </U.Box>
-
-        <U.Box>
-          <U.Text>Tattoo Name</U.Text>
-          <U.LongInput
+        <U.InputOutBox>
+          <U.TattooNameInput
             onChange={props.onChangeName}
             placeholder="Tattoo Name"
           />
-        </U.Box>
 
-        <U.TwoBox>
-          <U.Box>
-            <U.Text>Process</U.Text>
-            <U.Input
-              onChange={props.onChangeProcess}
-              placeholder="Working Process"
-            />
-          </U.Box>
+          <U.MainInfoInputWrapper>
+            <U.LeftSubjectWrapper>
+              <U.InputSubject>Price </U.InputSubject>
+              <U.InputSubject>Period </U.InputSubject>
+              <U.InputSubject>Region </U.InputSubject>
+              <U.InputSubject>Size </U.InputSubject>
+              <U.InputSubject>Genre </U.InputSubject>
+              <U.InputSubject>Detail </U.InputSubject>
+            </U.LeftSubjectWrapper>
 
-          <U.Box>
-            <U.Text>Date</U.Text>
-            <U.Input onChange={props.onChangeDate} placeholder="YEAR.MM.DD" />
-          </U.Box>
-        </U.TwoBox>
+            <U.RightInfoWrapper>
+              <U.Input onChange={props.onChangePrice} placeholder="200" />
+              <U.Input onChange={props.onChangePeriod} placeholder="N hrs" />
+              <U.Input onChange={props.onChangeRegion} placeholder="Seoul" />
+              <U.Input onChange={props.onChangeSize} placeholder="00cm" />
+              <U.SmallSelectionWrapper onChange={props.onChangeGenre}>
+                <option disabled={true} selected={true}>
+                  Select a genre
+                </option>
+                <option value={1}>Classic Americana</option>
+                <option value={2}>New School</option>
+                <option value={3}>Black and Grey</option>
+                <option value={4}>Japanese</option>
+                <option value={5}>Realism</option>
+                <option value={6}>Portraiture</option>
+                <option value={7}>Black Work</option>
+                <option value={8}>Stick and Poke</option>
+              </U.SmallSelectionWrapper>
+              <U.DetailInputWrapper>
+                <U.Input
+                  placeholder="Detail goes here"
+                  onChange={props.onChangeDetail}
+                />
+                <U.WordCountWrapper>
+                  <U.WordCount>{props.wordCount}</U.WordCount>
+                  <U.WordCountText>/300</U.WordCountText>
+                </U.WordCountWrapper>
+              </U.DetailInputWrapper>
+            </U.RightInfoWrapper>
+          </U.MainInfoInputWrapper>
 
-        <U.TwoBox>
-          <U.Box>
-            <U.Text>Design</U.Text>
-            <U.Input onChange={props.onchangeDesign} placeholder="ex) flower" />
-          </U.Box>
-          <U.Box>
-            <U.Text>Method</U.Text>
-            <U.SmallSelectionWrapper onChange={props.onChangeMethod}>
-              <option disabled={true} selected={true}>
-                Select a method
-              </option>
-              <option value={"Machine"}>Machine</option>
-              <option value={"Hand Poke"}>Hand Poke</option>
-            </U.SmallSelectionWrapper>
-          </U.Box>
-        </U.TwoBox>
-
-        <U.TwoBox>
-          <U.Box>
-            <U.Text>Genre</U.Text>
-            <U.SmallSelectionWrapper onChange={props.onChangeGenre}>
-              <option disabled={true} selected={true}>
-                Select a genre
-              </option>
-              <option value={"Classic Americana"}>Classic Americana</option>
-              <option value={"New School"}>New School</option>
-              <option value={"Japanese"}>Japanese</option>
-              <option value={"Black and Grey"}>Black and Grey</option>
-              <option value={"Portraiture"}>Portraiture</option>
-              <option value={"Realism"}>Realism</option>
-              <option value={"Blackwork"}>Blackwork</option>
-              <option value={"Water Color"}>Water Color</option>
-            </U.SmallSelectionWrapper>
-          </U.Box>
-          <U.Box>
-            <U.Text>Region</U.Text>
-            <U.SmallSelectionWrapper onChange={props.onChangeRegion}>
-              <option disabled={true} selected={true}>
-                Select Your Region
-              </option>
-              <option value={1}>Seoul</option>
-              <option value={2}>Busan</option>
-              <option value={3}>Incheon</option>
-              <option value={4}>Daegu</option>
-              <option value={5}>Guangju</option>
-            </U.SmallSelectionWrapper>
-          </U.Box>
-        </U.TwoBox>
-
-        <U.Box>
-          <U.Text>Description</U.Text>
-          <U.LongInput
-            onChange={props.onChangeDescription}
-            placeholder="Descriptions about the tattoo"
-          />
-        </U.Box>
-
-        <U.TwoBox>
-          <U.Box>
-            <U.Text>Payment</U.Text>
-            <U.Input
-              onChange={props.onChangePayment}
-              placeholder="Payment Method"
-            />
-          </U.Box>
-
-          <U.Box>
-            <U.Text>Price</U.Text>
-            <U.Input
-              onChange={props.onChangePrice}
-              placeholder="Only enter numbers"
-            />
-          </U.Box>
-        </U.TwoBox>
-
-        <U.TwoBox>
-          <U.Box>
-            <U.Text>Body Part</U.Text>
-            <U.SmallSelectionWrapper onChange={props.onChangeBodypart}>
-              <option disabled={true} selected={true}>
-                Select the body part
-              </option>
-              <option value={1}>Hand</option>
-              <option value={2}>Arm</option>
-              <option value={3}>Back</option>
-              <option value={4}>Leg</option>
-              <option value={5}>Thigh</option>
-              <option value={6}>Neck</option>
-              <option value={7}>Head</option>
-            </U.SmallSelectionWrapper>
-          </U.Box>
-
-          <U.Box>
-            <U.Text>Size</U.Text>
-            <U.Input
-              onChange={props.onChangeSize}
-              placeholder="enter the size"
-            />
-          </U.Box>
-        </U.TwoBox>
-
-        <U.UploadButton onClick={props.onClickUpload}>Upload</U.UploadButton>
-      </U.Body>
+          <U.Button onClick={props.onClickUpload}>Upload</U.Button>
+        </U.InputOutBox>
+      </U.MainWrapper>
     </U.Wrapper>
   );
 }

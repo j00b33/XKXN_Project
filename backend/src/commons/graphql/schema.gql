@@ -2,24 +2,50 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type TattooGenre {
+  id: Int!
+  genre: String!
+}
+
 type Tattoo {
   id: String!
   name: String!
   price: Int!
   detail: String!
+  region: String!
+  period: String!
+  size: String!
+  tattooGenre: TattooGenre!
+  date: DateTime!
   isSold: Boolean!
+  isDone: Boolean!
+  isPortfolio: Boolean!
+  likes: Int!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Query {
   fetchTattoos: [Tattoo!]!
+  fetchTattoo(tattooId: String!): Tattoo!
+  fetchPorfolios: [Tattoo!]!
 }
 
 type Mutation {
   createTattoo(createTattooInput: CreateTattooInput!): Tattoo!
+  createTattooGenre(genre: String!): TattooGenre!
 }
 
 input CreateTattooInput {
   name: String!
   price: Int!
   detail: String!
+  region: String!
+  size: String!
+  period: String!
+  tattooGenreId: Int!
+  isPortfolio: Boolean!
 }

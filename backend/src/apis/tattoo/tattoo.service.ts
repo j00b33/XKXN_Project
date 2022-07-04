@@ -11,11 +11,43 @@ export class TattooService {
   ) {}
 
   create({ createTattooInput }) {
-    const result = this.tattooRepository.save({ ...createTattooInput });
+    const { tattooGenreId, ...rest } = createTattooInput;
+    const result = this.tattooRepository.save({
+      tattooGenre: tattooGenreId,
+      ...rest,
+    });
     return result;
   }
 
+  // 타투 목록 조회
   async findAll() {
-    return this.tattooRepository.find();
+    return await this.tattooRepository.find({
+      relations: ['tattooGenre'],
+    });
+  }
+
+  // 장르별 조회
+  async findByGenre({ tattooGenreId }) {
+    return await this.tattooRepository.find({
+      where: { tattooGenre: tattooGenreId },
+    });
+  }
+
+  // 타투 디테일 조회 (타투 하나 조회)
+  async findOne({ tattooId }) {
+    return await this.tattooRepository.findOne({
+      where: { id: tattooId },
+      relations: ['tattooGenre'],
+    });
+  }
+
+  // 포트폴리오 작업 리스트 조회
+  async findPort() {
+    return await this.tattooRepository.find({
+      where: {
+        isPortfolio: true,
+      },
+      relations: ['tattooGenre'],
+    });
   }
 }

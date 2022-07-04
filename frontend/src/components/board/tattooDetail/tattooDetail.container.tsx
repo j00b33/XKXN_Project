@@ -2,7 +2,13 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { TiThSmall } from "react-icons/ti";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { AiOutlineCreditCard } from "react-icons/ai";
+import { MdOutlineCreditCardOff } from "react-icons/md";
+import { BsCheck2 } from "react-icons/bs";
 import * as D from "./tattooDetail.styles";
+import { useState } from "react";
 
 export const FETCH_TATTOO = gql`
   query fetchTattoo($tattooId: String!) {
@@ -10,109 +16,53 @@ export const FETCH_TATTOO = gql`
       id
       name
       price
-      description
-      tattooist {
-        id
-        name
-      }
-      tattooTags {
-        tag
-      }
-      tattooMethod {
-        method
-      }
+      detail
       tattooGenre {
+        id
         genre
       }
-      tattooBodypart {
-        bodypart
-        size
-      }
-      tattooRegion {
-        region
-      }
+      size
+      region
+      period
+      date
+      likes
+      isSold
+      isDone
     }
   }
 `;
 
-export const FETCH_IMAGE = gql`
-  query fetchImage($tattooId: String) {
-    fetchImage(tattooId: $tattooID) {
-      id
-      image
-    }
-  }
-`;
-
-export const CREATE_RECEIPT = gql`
-  mutation createReceipt($impUid: String!, $price: Float!, $tattooId: String!) {
-    createReceipt(impUid: $impUid, price: $price, tattooId: $tattooId) {
-      id
-      price
-    }
-  }
-`;
-
-export const FETCH_USER = gql`
-  query fetchUser {
-    fetchUser {
-      id
-      name
-      phoneNumber
-      email
-    }
-  }
-`;
+// export const CREATE_RECEIPT = gql`
+//   mutation createReceipt($impUid: String!, $price: Float!, $tattooId: String!) {
+//     createReceipt(impUid: $impUid, price: $price, tattooId: $tattooId) {
+//       id
+//       price
+//     }
+//   }
+// `;
 
 export default function TattooDetailContainer() {
   const router = useRouter();
+
+  const [isLiked, setIsLiked] = useState(false);
+  const [isDone, setIsDone] = useState(false);
 
   const { data } = useQuery(FETCH_TATTOO, {
     variables: { tattooId: String(router.query.tattooDetail) },
   });
 
-  const info = data?.fetchTattoo;
+  const onClickList = () => {
+    router.push("/board/tattooList");
+  };
 
-  const { data: imageData } = useQuery(FETCH_IMAGE, {
-    variables: {
-      tattooId: String(router.query.tattooDetail),
-    },
-  });
+  console.log(data);
 
-  console.log(imageData, "🐚 ");
+  const onClickLike = () => {
+    setIsLiked((prev) => !prev);
+  };
 
-  const { data: userData } = useQuery(FETCH_USER);
-
-  const [createReceipt] = useMutation(CREATE_RECEIPT);
-
-  const onClickPurchase = async () => {
-    const IMP = window.IMP; // 생략 가능
-    IMP.init("imp13990733");
-
-    IMP.request_pay(
-      {
-        pg: "html5_inicis",
-        pay_method: "card",
-        name: info?.name,
-        amount: Number(info?.price),
-        buyer_email: userData?.email,
-        buyer_name: userData?.name,
-        buyer_tel: userData?.phoneNumber,
-        buyer_addr: "대한민국",
-        buyer_postcode: "00000",
-      },
-      async (rsp) => {
-        if (rsp.success) {
-          await createReceipt({
-            variables: {
-              impUid: rsp.imp_uid,
-              price: rsp.amount,
-              tattooId: info?.id,
-            },
-          });
-        }
-      }
-    );
+  const onClickDone = () => {
+    setIsDone(true);
   };
 
   return (
@@ -128,33 +78,98 @@ export default function TattooDetailContainer() {
         ></script>
       </Head>
       <D.MainWrapper>
-        <D.Image src={imageData?.image ? imageData.image : "/cotton.png"} />
-        <D.Context>
-          <D.ContextHeader>
-            <D.Title>{info?.name}</D.Title>
-            <D.Title>{info?.price} ₩</D.Title>
-          </D.ContextHeader>
+        <D.RecentViewWrapper>
+          <D.RecentViewTitle>Recent</D.RecentViewTitle>
+        </D.RecentViewWrapper>
+        <D.Image src={"/dummytattoo.png"} />
+        <D.InfoWrapper>
+          <D.Headers>
+            {/* Header */}
+            <D.InfoHeader>
+              <D.HeaderText>$ {data?.fetchTattoo.price}</D.HeaderText>
+              <D.HeaderText>{data?.fetchTattoo.name}</D.HeaderText>
+            </D.InfoHeader>
 
-          <D.ContextDivisionLine />
+            {/* Header */}
+            <D.SubHeader>
+              <D.SubHeaderText>
+                Tattooist Hanse :: @_hanse_the_tatt
+              </D.SubHeaderText>
+              <D.SubHeaderText>
+                {data?.fetchTattoo.date.slice(0, 10)}
+              </D.SubHeaderText>
+            </D.SubHeader>
+          </D.Headers>
 
-          <D.ContextDescription>
-            <D.DescriptionTop>
-              <D.Text>
-                Tattooist: {info?.tattooist.name} @{info?.tattooist.id}
-              </D.Text>
-              <D.Text>Region: {info?.tattooRegion.region}</D.Text>
-              <D.Text>Body Part : {info?.tattooBodypart?.bodypart}</D.Text>
-            </D.DescriptionTop>
-            <D.Text>{info?.description}</D.Text>
+          {/* Main Info */}
+          <D.MainInfoWrapper>
+            <D.SingleInfo>
+              <D.Info>Region</D.Info>
+              <D.InfoData>{data?.fetchTattoo.region}</D.InfoData>
+            </D.SingleInfo>
 
-            <D.Text>
-              #{info?.tattooMethod?.method} #{info?.tattooGenre?.genre}
-            </D.Text>
-          </D.ContextDescription>
-        </D.Context>
+            <D.SingleInfo>
+              <D.Info>Period</D.Info>
+              <D.InfoData>{data?.fetchTattoo.period}</D.InfoData>
+            </D.SingleInfo>
+
+            <D.SingleInfo>
+              <D.Info>Genre</D.Info>
+              <D.InfoData>{data?.fetchTattoo.tattooGenre.genre}</D.InfoData>
+            </D.SingleInfo>
+
+            <D.SingleInfo>
+              <D.Info>Size</D.Info>
+              <D.InfoData>{data?.fetchTattoo.size}</D.InfoData>
+            </D.SingleInfo>
+
+            <D.SingleInfo>
+              <D.Info>Detail</D.Info>
+              <D.InfoData>{data?.fetchTattoo.detail}</D.InfoData>
+            </D.SingleInfo>
+          </D.MainInfoWrapper>
+
+          <D.Tools>
+            <D.SingleTool onClick={onClickList}>
+              <D.ToolIcon>
+                <TiThSmall />
+              </D.ToolIcon>
+              <D.ToolText>List</D.ToolText>
+            </D.SingleTool>
+
+            <D.SingleTool>
+              <D.ToolIcon onClick={onClickLike}>
+                {isLiked ? <FaHeart /> : <FaRegHeart />}
+              </D.ToolIcon>
+              <D.ToolText>Likes</D.ToolText>
+            </D.SingleTool>
+
+            <D.SingleTool>
+              <D.ToolIcon>
+                {data?.fetchTattoo.isSold ? (
+                  <MdOutlineCreditCardOff />
+                ) : (
+                  <AiOutlineCreditCard />
+                )}
+              </D.ToolIcon>
+              <D.ToolText>
+                {data?.fetchTattoo.isSold ? "Registerd" : "Register"}
+              </D.ToolText>
+            </D.SingleTool>
+
+            {data?.fetchTattoo.isSold ? (
+              <D.SingleTool onClick={onClickDone}>
+                <D.ToolIcon>
+                  <BsCheck2 />
+                </D.ToolIcon>
+                <D.ToolText>
+                  {data?.fetchTattoo.isDone ? "Done" : "Mark Done"}
+                </D.ToolText>
+              </D.SingleTool>
+            ) : null}
+          </D.Tools>
+        </D.InfoWrapper>
       </D.MainWrapper>
-
-      <D.Purchase onClick={onClickPurchase}>Purchase</D.Purchase>
     </D.Wrapper>
   );
 }

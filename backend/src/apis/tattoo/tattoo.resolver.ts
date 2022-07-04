@@ -18,4 +18,14 @@ export class TattooResolver {
   async fetchTattoos() {
     return this.tattooService.findAll();
   }
+
+  @Query(() => Tattoo)
+  fetchTattoo(@Args('tattooId') tattooId: string) {
+    return this.tattooService.findOne({ tattooId });
+  }
+
+  @Query(() => [Tattoo])
+  fetchPorfolios() {
+    return this.tattooService.findPort();
+  }
 }

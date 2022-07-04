@@ -10,4 +10,19 @@ export class CreateTattooInput {
 
   @Field(() => String)
   detail: string;
+
+  @Field(() => String)
+  region: string;
+
+  @Field(() => String)
+  size: string;
+
+  @Field(() => String)
+  period: string;
+
+  @Field(() => Int)
+  tattooGenreId: number;
+
+  @Field(() => Boolean)
+  isPortfolio: boolean;
 }

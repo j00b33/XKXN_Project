@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import UploadPresenter from "./upload.presenter";
 
@@ -8,7 +8,6 @@ export const CREATE_TATTOO = gql`
   mutation createTattoo($createTattooInput: CreateTattooInput!) {
     createTattoo(createTattooInput: $createTattooInput) {
       id
-      region
     }
   }
 `;
@@ -19,72 +18,41 @@ export default function UploadTattooContainer() {
   const router = useRouter();
 
   const [name, setName] = useState("");
-
   const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
-  const [process, setProcess] = useState("");
-  const [payment, setPayment] = useState("");
-  const [date, setDate] = useState("");
-  const [region, setRegion] = useState(0);
-
-  const [bodypart, setBodypart] = useState(0);
+  const [detail, setDetail] = useState("");
+  const [region, setRegion] = useState("");
+  const [period, setPeriod] = useState("");
   const [size, setSize] = useState("");
-  const [design, setDesign] = useState("");
-  const [tags, setTags] = useState([]);
-  const [method, setMethod] = useState("");
-  const [genre, setGenre] = useState("");
-  const [type, setType] = useState("");
+  const [genre, setGenre] = useState(0);
+  const [wordCount, setWordCount] = useState(0);
 
   const onChangeName = (event) => {
     setName(event.target.value);
   };
 
   const onChangePrice = (event) => {
-    setPrice(event.target.value);
-    console.log(price);
+    setPrice(Number(event.target.value));
   };
 
-  const onChangeProcess = (event) => {
-    setProcess(event.target.value);
+  const onChangePeriod = (event) => {
+    setPeriod(event.target.value);
   };
 
-  const onChangeDate = (event) => {
-    setDate(event.target.value);
-  };
-
-  const onChangeDesign = (event) => {
-    setDesign(event.target.value);
-  };
-
-  const onChangeMethod = (event) => {
-    setMethod(event.target.value);
-  };
-
-  const onChangeDescription = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const onChangePayment = (event) => {
-    setPayment(event.target.value);
+  const onChangeDetail = (event) => {
+    setDetail(event.target.value);
+    setWordCount(detail.length + 1);
   };
 
   const onChangeRegion = (event) => {
     setRegion(event.currentTarget.value);
-    console.log(event.currentTarget.value);
-  };
-
-  const onChangeBodypart = (event) => {
-    setBodypart(event.currentTarget.value);
-    console.log(event.currentTarget.value);
   };
 
   const onChangeSize = (event) => {
     setSize(event.target.value);
-    console.log(event.target.value);
   };
 
   const onChangeGenre = (event) => {
-    setGenre(event.target.value);
+    setGenre(Number(event.target.value));
   };
 
   const onClickUpload = async () => {
@@ -94,18 +62,12 @@ export default function UploadTattooContainer() {
           createTattooInput: {
             name,
             price,
-            description,
-            process,
-            payment,
-            date,
-            tattooMethod: { method },
-            tattooDesign: { name: design },
-            tattooRegionId: region,
-            tattooTags: tags,
-            tattooBodypart: {
-              bodypart,
-              size,
-            },
+            detail,
+            region,
+            period,
+            size,
+            tattooGenreId: genre,
+            isPortfolio: false,
           },
         },
       });
@@ -119,18 +81,14 @@ export default function UploadTattooContainer() {
   return (
     <UploadPresenter
       onChangeName={onChangeName}
-      onChangeProcess={onChangeProcess}
-      onChangeDate={onChangeDate}
-      onChangeDescription={onChangeDescription}
-      onChangePayment={onChangePayment}
+      onChangePeriod={onChangePeriod}
+      onChangeDetail={onChangeDetail}
       onChangePrice={onChangePrice}
       onChangeRegion={onChangeRegion}
-      onClickUpload={onClickUpload}
-      onChangeBodypart={onChangeBodypart}
-      onChangeDesign={onChangeDesign}
-      onChangeMethod={onChangeMethod}
-      onChangeGenre={onChangeGenre}
       onChangeSize={onChangeSize}
+      onChangeGenre={onChangeGenre}
+      wordCount={wordCount}
+      onClickUpload={onClickUpload}
     />
   );
 }
