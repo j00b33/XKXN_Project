@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { runInThisContext } from 'vm';
 import { Tattoo } from './entities/tattoo.entity';
 
 @Injectable()

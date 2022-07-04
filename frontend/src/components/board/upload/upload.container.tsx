@@ -68,6 +68,7 @@ export default function UploadTattooContainer() {
             size,
             tattooGenreId: genre,
             isPortfolio: false,
+            tattooImageUrl: "",
           },
         },
       });

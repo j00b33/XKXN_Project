@@ -172,7 +172,7 @@ export default function TattooDetailContainer() {
               <D.ToolIcon onClick={onClickLike}>
                 {isLiked ? <FaHeart /> : <FaRegHeart />}
               </D.ToolIcon>
-              <D.ToolText>Likes</D.ToolText>
+              <D.ToolText>{data?.fetchTattoo.likes} Likes</D.ToolText>
             </D.SingleTool>
 
             <D.SingleTool>
