@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import * as T from "./tattoolist.styles";
 import InfiniteScroll from "react-infinite-scroller";
+import { BsViewList } from "react-icons/bs";
 
 export const FETCH_TATTOOS = gql`
   query fetchTattoos {
