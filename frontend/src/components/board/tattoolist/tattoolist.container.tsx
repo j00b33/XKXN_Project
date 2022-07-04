@@ -35,10 +35,36 @@ export default function TattooListContainer() {
       recentData.push(el);
     }
 
+    console.log("🫣", recentData.length);
+
+    if (recentData.length < 5) {
+      localStorage.setItem("Recent View", JSON.stringify(recentData));
+    } else {
+      recentData.shift();
+      localStorage.setItem("Recent View", JSON.stringify(recentData));
+    }
+
     localStorage.setItem("Recent View", JSON.stringify(recentData));
 
     router.push(`/board/${event.currentTarget.id}`);
   };
+
+  // ========
+  // if (localStorage.getItem("test")) {
+  //   let arr = JSON.parse(localStorage.getItem("test"));
+  //   console.log(arr);
+  //   if (arr.length < 4) {
+  //     arr.push(str);
+  //     localStorage.setItem("test", JSON.stringify(arr));
+  //   } else {
+  //     arr.shift();
+  //     arr.push(str);
+  //     localStorage.setItem("test", JSON.stringify(arr));
+  //   }
+  // } else {
+  //   localStorage.setItem("test", JSON.stringify([str]));
+  // }
+  // =========
 
   const router = useRouter();
 
