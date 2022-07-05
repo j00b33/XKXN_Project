@@ -21,7 +21,7 @@ type Tattoo {
   isDone: Boolean!
   isPortfolio: Boolean!
   likes: Int!
-  tattooImageUrl: String!
+  tattooImageUrl: String
 }
 
 """
@@ -49,5 +49,5 @@ input CreateTattooInput {
   period: String!
   tattooGenreId: Int!
   isPortfolio: Boolean!
-  tattooImageUrl: String!
+  tattooImageUrl: String
 }

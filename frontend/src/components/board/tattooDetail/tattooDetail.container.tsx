@@ -99,7 +99,7 @@ export default function TattooDetailContainer() {
                 <D.RecentImg
                   id={el.id}
                   key={el.id}
-                  src={el.tattooImageUrl}
+                  src={el.tattooImageUrl ? el.tattooImageUrl : "/default.png"}
                   onClick={onClickDetail(el)}
                 />
               ))}

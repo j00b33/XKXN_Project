@@ -66,7 +66,7 @@ export class Tattoo {
   @Field(() => Int)
   likes: number;
 
-  @Column()
-  @Field(() => String)
+  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
   tattooImageUrl: string;
 }
