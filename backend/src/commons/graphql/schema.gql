@@ -29,15 +29,29 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type User {
+  id: String!
+  name: String!
+  isTattooist: Boolean!
+  email: String!
+  phoneNumber: String!
+  detail: String
+  image: String
+}
+
 type Query {
   fetchTattoos: [Tattoo!]!
   fetchTattoo(tattooId: String!): Tattoo!
   fetchPorfolios: [Tattoo!]!
+  fetchTattooists: [User!]!
+  fetchUser(userId: String!): User!
 }
 
 type Mutation {
   createTattoo(createTattooInput: CreateTattooInput!): Tattoo!
   createTattooGenre(genre: String!): TattooGenre!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!, userId: String!): User!
 }
 
 input CreateTattooInput {
@@ -50,4 +64,26 @@ input CreateTattooInput {
   tattooGenreId: Int!
   isPortfolio: Boolean!
   tattooImageUrl: String
+}
+
+input CreateUserInput {
+  id: String!
+  name: String!
+  isTattooist: Boolean!
+  email: String!
+  phoneNumber: String!
+  detail: String
+  image: String
+  password: String!
+}
+
+input UpdateUserInput {
+  id: String
+  name: String
+  isTattooist: Boolean
+  email: String
+  phoneNumber: String
+  detail: String
+  image: String
+  password: String
 }

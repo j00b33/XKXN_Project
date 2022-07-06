@@ -4,11 +4,13 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TattooGenreModule } from './apis/tattooGenre/tattooGenre.module';
+import { UserModule } from './apis/user/user.module';
 
 @Module({
   imports: [
     TattooModule,
     TattooGenreModule,
+    UserModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/commons/graphql/schema.gql', // => typeDef 얘네가 자동으로 만들어줘서 우리가 굳이 안만들어도 됨
