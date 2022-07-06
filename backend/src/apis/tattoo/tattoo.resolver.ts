@@ -26,7 +26,7 @@ export class TattooResolver {
   }
 
   @Query(() => [Tattoo])
-  async fetchPorfolios(@Args('tattooistId') tattooistId: string) {
+  async fetchPortfolios(@Args('tattooistId') tattooistId: string) {
     return await this.tattooService.findPort({ tattooistId });
   }
 

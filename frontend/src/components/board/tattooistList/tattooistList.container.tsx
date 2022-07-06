@@ -25,6 +25,10 @@ export default function TattooistListContainer() {
     router.push(`/user/tattooistPage/${event.currentTarget.id}`);
   };
 
+  const onClickUploadReview = (event) => {
+    router.push("/review/upload");
+  };
+
   return (
     <T.Wrapper>
       <T.Title>Tattooists</T.Title>
@@ -42,7 +46,9 @@ export default function TattooistListContainer() {
               </T.HeartIcon>
               <T.UserInfo>{el.likes} Likes</T.UserInfo>
             </T.UserLikesWrapper>
-            <T.ReviewButton>+ Review</T.ReviewButton>
+            <T.ReviewButton onClick={onClickUploadReview} id={el.tattooist?.id}>
+              + Review
+            </T.ReviewButton>
           </T.Onebox>
         ))}
       </T.ListWrapper>

@@ -22,12 +22,14 @@ export class ReviewService {
   findOne({ reviewId }) {
     return this.reviewRepository.findOne({
       where: { id: reviewId },
+      relations: ['tattooist'],
     });
   }
 
   findAll({ tattooistId }) {
     return this.reviewRepository.find({
       where: { tattooist: tattooistId },
+      relations: ['tattooist'],
     });
   }
 }

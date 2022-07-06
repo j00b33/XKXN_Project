@@ -75,7 +75,7 @@ export default function UploadTattooContainer() {
       Modal.success({ content: "Tattoo successfully uploaded" });
       router.push(`/board/${result.data.createTattoo.id}`);
     } catch (error) {
-      console.log(error.message);
+      Modal.error({ content: "Error" });
     }
   };
 
