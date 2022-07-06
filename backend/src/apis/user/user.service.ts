@@ -33,6 +33,12 @@ export class UserService {
     });
   }
 
+  async fetchTattooist({ tattooistId }) {
+    return await this.userRepository.findOne({
+      where: { id: tattooistId },
+    });
+  }
+
   async fetchUser({ userId }) {
     return await this.userRepository.findOne({
       id: userId,

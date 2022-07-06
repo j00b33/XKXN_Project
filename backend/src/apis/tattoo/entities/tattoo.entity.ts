@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { TattooGenre } from 'src/apis/tattooGenre/entities/tattooGenre.entity';
+import { User } from 'src/apis/user/entities/user.entity';
 import {
   Column,
   Entity,
@@ -69,4 +70,8 @@ export class Tattoo {
   @Column({ nullable: true })
   @Field(() => String, { nullable: true })
   tattooImageUrl: string;
+
+  @ManyToOne(() => User)
+  @Field(() => User)
+  tattooist: User;
 }

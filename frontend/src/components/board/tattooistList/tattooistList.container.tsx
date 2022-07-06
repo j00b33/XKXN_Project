@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { FaRegHeart } from "react-icons/fa";
 import * as T from "./tattooistList.styles";
 
 export const FETCH_TATTOOISTS = gql`
@@ -8,74 +9,43 @@ export const FETCH_TATTOOISTS = gql`
     fetchTattooists {
       id
       name
-      # userImage
       email
-      userDetail
+      detail
+      image
+      likes
     }
   }
 `;
 
 export default function TattooistListContainer() {
-  const [isTrue, setIsTrue] = useState(false);
-
-  const handleModal = () => {
-    setIsTrue((prev) => !prev);
-  };
-
-  const { data, loading } = useQuery(FETCH_TATTOOISTS);
+  const { data } = useQuery(FETCH_TATTOOISTS);
   const router = useRouter();
 
-  if (loading) {
-    return "Loading...";
-  }
-
-  console.log(" 👑 Tattooist List ", data);
-
-  const onClickContact = () => {
-    window.open("https://mail.google.com/mail/u/0/#inbox?compose=new");
+  const onClickTattooist = (event) => {
+    router.push(`/user/tattooistPage/${event.currentTarget.id}`);
   };
 
   return (
     <T.Wrapper>
-      {isTrue && (
-        <T.ModalWrapper>
-          <T.Modal>
-            <T.ModalBody>모달입니다</T.ModalBody>
-            <T.CloseModal onClick={handleModal}>close</T.CloseModal>
-          </T.Modal>
-        </T.ModalWrapper>
-      )}
       <T.Title>Tattooists</T.Title>
-
-      <T.Body>
+      <T.ListWrapper>
         {data?.fetchTattooists.map((el) => (
-          <T.SingleBox key={el.id} id={el.id} onClick={handleModal}>
-            <T.Image
-              src={
-                // el?.userImage ? el.userImage : "/defaulttattooist.png"}
-                "/profilepic/black.png"
-              }
-            />
-            <T.UserInfo>
-              <T.TextLine>
-                <T.Text>ID: </T.Text>
-                <T.ID>{el.id}</T.ID>
-              </T.TextLine>
-
-              <T.TextLine>
-                <T.Text> Name: </T.Text>
-                <T.Name>{el.name}</T.Name>
-              </T.TextLine>
-              <T.Email onClick={onClickContact}>{el.email}</T.Email>
-            </T.UserInfo>
-          </T.SingleBox>
+          <T.Onebox key={el.id}>
+            <T.UserImage src={el.image ? el.image : "/default.png"} />
+            <T.UserName id={el.id} onClick={onClickTattooist}>
+              {el.name}
+            </T.UserName>
+            <T.UserInfo>{el.email}</T.UserInfo>
+            <T.UserLikesWrapper>
+              <T.HeartIcon>
+                <FaRegHeart />
+              </T.HeartIcon>
+              <T.UserInfo>{el.likes} Likes</T.UserInfo>
+            </T.UserLikesWrapper>
+            <T.ReviewButton>+ Review</T.ReviewButton>
+          </T.Onebox>
         ))}
-      </T.Body>
+      </T.ListWrapper>
     </T.Wrapper>
   );
-}
-
-{
-  /* 
-              <T.Text> Description: {el?.userDetail} </T.Text> */
 }

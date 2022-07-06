@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { User } from '../user/entities/user.entity';
 import { Tattoo } from './entities/tattoo.entity';
 
 @Injectable()
@@ -11,18 +12,19 @@ export class TattooService {
   ) {}
 
   create({ createTattooInput }) {
-    const { tattooGenreId, ...rest } = createTattooInput;
+    const { tattooGenreId, tattooist, ...rest } = createTattooInput;
     const result = this.tattooRepository.save({
       tattooGenre: tattooGenreId,
+      tattooist: tattooist,
       ...rest,
     });
     return result;
   }
 
-  // 타투 목록 조회
+  // 타투 목록 전체 조회
   async findAll() {
     return await this.tattooRepository.find({
-      relations: ['tattooGenre'],
+      relations: ['tattooGenre', 'tattooist'],
     });
   }
 
@@ -37,17 +39,18 @@ export class TattooService {
   async findOne({ tattooId }) {
     return await this.tattooRepository.findOne({
       where: { id: tattooId },
-      relations: ['tattooGenre'],
+      relations: ['tattooGenre', 'tattooist'],
     });
   }
 
   // 포트폴리오 작업 리스트 조회
-  async findPort() {
+  async findPort({ tattooistId }) {
     return await this.tattooRepository.find({
       where: {
         isPortfolio: true,
+        tattooist: tattooistId,
       },
-      relations: ['tattooGenre'],
+      relations: ['tattooGenre', 'tattooist'],
     });
   }
 

@@ -4,136 +4,109 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 104px;
+  margin-bottom: 50px;
 `;
 
-export const ModalWrapper = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-`;
-
-export const Modal = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-
-  background-color: white;
-
-  width: 700px;
-  height: 500px;
-  border: 1px solid black;
-
-  opacity: 0.9;
-  border-radius: 20px;
-`;
-
-export const ModalBody = styled.div`
-  font-size: 20px;
-`;
-
-export const CloseModal = styled.div`
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 20px;
-  font-weight: 700;
-
-  color: #64748b;
-`;
 export const Title = styled.div`
   font-size: 30px;
-  margin-bottom: 40px;
-`;
-
-export const Body = styled.div`
-  margin-bottom: 30px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  margin-bottom: 15px;
+  font-family: "Darker Grotesque";
 
   width: 900px;
 
-  margin-bottom: 30px;
-  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
-export const SingleBox = styled.div`
-  width: 200px;
-  height: 300px;
-
-  border: 2px solid #2d394b;
-
+export const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const Onebox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-evenly;
 
-  margin-bottom: 50px;
+  width: 900px;
+  height: 70px;
+
+  border: 1px solid black;
+
+  margin-bottom: 21px;
+`;
+
+export const UserImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+
+  object-fit: cover;
+`;
+
+export const UserLikesWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const HeartIcon = styled.div`
+  margin-right: 5px;
+  font-size: 17px;
+  margin-top: 7px;
+`;
+
+export const UserName = styled.div`
+  font-size: 15px;
+  font-family: "Darker Grotesque";
+
+  width: 110px;
 
   cursor: pointer;
+
   :hover {
-    background-color: #e5ebf5;
+    color: #36839b;
   }
 
   transition: 0.4s;
 `;
 
 export const UserInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+  font-size: 15px;
+  font-family: "Darker Grotesque";
 
-  height: 100px;
-
-  width: 200px;
+  width: 110px;
 `;
 
-export const TextLine = styled.div`
+export const ReviewButton = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 
-  width: 170px;
-`;
+  border: none;
+  background-color: #d9d9d9;
+  border-radius: 25px;
 
-export const Text = styled.div`
-  font-size: 18px;
-  margin-right: 10px;
-`;
-
-export const ID = styled.div`
-  font-weight: 600;
-  color: #64748b;
-
-  font-size: 18px;
-`;
-
-export const Name = styled.div`
+  font-family: "Darker Grotesque";
   font-size: 15px;
-  font-weight: 600;
-  color: #64748b;
-`;
 
-export const Image = styled.img`
-  width: 160px;
-  height: 160px;
-  border-radius: 500px;
-`;
+  width: 120px;
+  height: 35px;
+  padding-bottom: 5px;
 
-export const Email = styled.div`
-  font-size: 15px;
+  cursor: pointer;
   :hover {
-    color: #64748b;
+    background-color: #4c4c4c;
+    color: white;
   }
+
   transition: 0.4s;
 `;

@@ -28,4 +28,7 @@ export class CreateTattooInput {
 
   @Field(() => String, { nullable: true })
   tattooImageUrl: string;
+
+  @Field(() => String)
+  tattooistId: string;
 }

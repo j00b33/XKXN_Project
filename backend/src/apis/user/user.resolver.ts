@@ -22,6 +22,11 @@ export class UserResolver {
   }
 
   @Query(() => User)
+  async fetchTattooist(@Args('tattooistId') tattooistId: string) {
+    return await this.userService.fetchTattooist({ tattooistId });
+  }
+
+  @Query(() => User)
   async fetchUser(@Args('userId') userId: string) {
     return await this.userService.fetchUser({ userId });
   }

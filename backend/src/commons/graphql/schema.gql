@@ -7,6 +7,17 @@ type TattooGenre {
   genre: String!
 }
 
+type User {
+  id: String!
+  name: String!
+  isTattooist: Boolean!
+  email: String!
+  phoneNumber: String!
+  detail: String
+  image: String
+  likes: Int!
+}
+
 type Tattoo {
   id: String!
   name: String!
@@ -22,6 +33,7 @@ type Tattoo {
   isPortfolio: Boolean!
   likes: Int!
   tattooImageUrl: String
+  tattooist: User!
 }
 
 """
@@ -29,22 +41,23 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type User {
+type Review {
   id: String!
-  name: String!
-  isTattooist: Boolean!
-  email: String!
-  phoneNumber: String!
-  detail: String
+  detail: String!
   image: String
+  rate: Int!
+  tattooist: User!
 }
 
 type Query {
   fetchTattoos: [Tattoo!]!
   fetchTattoo(tattooId: String!): Tattoo!
-  fetchPorfolios: [Tattoo!]!
+  fetchPorfolios(tattooistId: String!): [Tattoo!]!
   fetchTattooists: [User!]!
+  fetchTattooist(tattooistId: String!): User!
   fetchUser(userId: String!): User!
+  fetchReview(reviewId: String!): Review!
+  fetchReviews(tattooistId: String!): [Review!]!
 }
 
 type Mutation {
@@ -53,6 +66,7 @@ type Mutation {
   createTattooGenre(genre: String!): TattooGenre!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!, userId: String!): User!
+  createReview(createReviewInput: CreateReviewInput!): Review!
 }
 
 input CreateTattooInput {
@@ -65,6 +79,7 @@ input CreateTattooInput {
   tattooGenreId: Int!
   isPortfolio: Boolean!
   tattooImageUrl: String
+  tattooistId: String!
 }
 
 input UpdateTattooInput {
@@ -77,6 +92,7 @@ input UpdateTattooInput {
   tattooGenreId: Int
   isPortfolio: Boolean
   tattooImageUrl: String
+  tattooistId: String
 }
 
 input CreateUserInput {
@@ -99,4 +115,11 @@ input UpdateUserInput {
   detail: String
   image: String
   password: String
+}
+
+input CreateReviewInput {
+  detail: String!
+  rate: Int!
+  image: String
+  tattooistId: String!
 }

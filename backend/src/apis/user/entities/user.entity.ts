@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
@@ -34,4 +34,8 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column({ default: 0 })
+  @Field(() => Int)
+  likes: number;
 }
