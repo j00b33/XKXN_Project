@@ -32,6 +32,7 @@ export class TattooService {
   async findByGenre({ tattooGenreId }) {
     return await this.tattooRepository.find({
       where: { tattooGenre: tattooGenreId },
+      relations: ['tattooGenre', 'tattooist'],
     });
   }
 
@@ -51,6 +52,16 @@ export class TattooService {
         tattooist: tattooistId,
       },
       relations: ['tattooGenre', 'tattooist'],
+    });
+  }
+
+  // 포트폴리오가 아닌 both isSold true false 작품들
+  async fetchCreatedTattoos({ tattooistId }) {
+    return await this.tattooRepository.find({
+      where: {
+        isPortfolio: false,
+        tattooist: tattooistId,
+      },
     });
   }
 

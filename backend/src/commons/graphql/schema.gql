@@ -53,6 +53,8 @@ type Query {
   fetchTattoos: [Tattoo!]!
   fetchTattoo(tattooId: String!): Tattoo!
   fetchPorfolios(tattooistId: String!): [Tattoo!]!
+  fetchTattoosInTTPage(tattooistId: String!): [Tattoo!]!
+  fetchTattooByGenre(tattooGenreId: String!): [Tattoo!]!
   fetchTattooists: [User!]!
   fetchTattooist(tattooistId: String!): User!
   fetchUser(userId: String!): User!

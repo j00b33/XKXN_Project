@@ -30,6 +30,16 @@ export class TattooResolver {
     return await this.tattooService.findPort({ tattooistId });
   }
 
+  @Query(() => [Tattoo])
+  async fetchTattoosInTTPage(@Args('tattooistId') tattooistId: string) {
+    return this.tattooService.fetchCreatedTattoos({ tattooistId });
+  }
+
+  @Query(() => [Tattoo])
+  async fetchTattooByGenre(@Args('tattooGenreId') tattooGenreId: string) {
+    return this.tattooService.findByGenre({ tattooGenreId });
+  }
+
   @Mutation(() => Tattoo)
   async updateTattoo(
     @Args('updateTattooInput') updateTattooInput: UpdateTattooInput,
