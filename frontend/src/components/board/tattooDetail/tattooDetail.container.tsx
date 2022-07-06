@@ -28,6 +28,10 @@ export const FETCH_TATTOO = gql`
       likes
       isSold
       isDone
+      tattooist {
+        id
+        name
+      }
       tattooImageUrl
     }
   }
@@ -124,7 +128,8 @@ export default function TattooDetailContainer() {
             {/* Header */}
             <D.SubHeader>
               <D.SubHeaderText>
-                Tattooist Hanse :: @_hanse_the_tatt
+                Tattooist {data?.fetchTattoo?.tattooist.name} :: @
+                {data?.fetchTattoo?.tattooist.id}
               </D.SubHeaderText>
               <D.SubHeaderText>
                 {data?.fetchTattoo.date.slice(0, 10)}
