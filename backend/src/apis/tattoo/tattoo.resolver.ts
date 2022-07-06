@@ -2,6 +2,7 @@ import { CreateTattooInput } from './dto/createTattoo.input';
 import { TattooService } from './tattoo.service';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Tattoo } from './entities/tattoo.entity';
+import { UpdateTattooInput } from './dto/updateTattoo.input';
 
 @Resolver()
 export class TattooResolver {
@@ -20,12 +21,20 @@ export class TattooResolver {
   }
 
   @Query(() => Tattoo)
-  fetchTattoo(@Args('tattooId') tattooId: string) {
-    return this.tattooService.findOne({ tattooId });
+  async fetchTattoo(@Args('tattooId') tattooId: string) {
+    return await this.tattooService.findOne({ tattooId });
   }
 
   @Query(() => [Tattoo])
-  fetchPorfolios() {
-    return this.tattooService.findPort();
+  async fetchPorfolios() {
+    return await this.tattooService.findPort();
+  }
+
+  @Mutation(() => Tattoo)
+  async updateTattoo(
+    @Args('updateTattooInput') updateTattooInput: UpdateTattooInput,
+    @Args('tattooId') tattooId: string,
+  ) {
+    return await this.tattooService.update({ tattooId, updateTattooInput });
   }
 }

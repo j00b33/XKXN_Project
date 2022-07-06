@@ -49,6 +49,7 @@ type Query {
 
 type Mutation {
   createTattoo(createTattooInput: CreateTattooInput!): Tattoo!
+  updateTattoo(updateTattooInput: UpdateTattooInput!, tattooId: String!): Tattoo!
   createTattooGenre(genre: String!): TattooGenre!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!, userId: String!): User!
@@ -63,6 +64,18 @@ input CreateTattooInput {
   period: String!
   tattooGenreId: Int!
   isPortfolio: Boolean!
+  tattooImageUrl: String
+}
+
+input UpdateTattooInput {
+  name: String
+  price: Int
+  detail: String
+  region: String
+  size: String
+  period: String
+  tattooGenreId: Int
+  isPortfolio: Boolean
   tattooImageUrl: String
 }
 

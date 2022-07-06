@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { runInThisContext } from 'vm';
 import { Tattoo } from './entities/tattoo.entity';
 
 @Injectable()
@@ -50,5 +49,18 @@ export class TattooService {
       },
       relations: ['tattooGenre'],
     });
+  }
+
+  async update({ tattooId, updateTattooInput }) {
+    const tattoo = await this.tattooRepository.findOne({
+      where: { id: tattooId },
+    });
+
+    const updatedTattoo = {
+      ...tattoo,
+      updateTattooInput,
+    };
+
+    return await this.tattooRepository.save(updatedTattoo);
   }
 }
