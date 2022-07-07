@@ -140,3 +140,34 @@ export const NewTattooWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const IconWrapper = styled.div`
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-left: 240px;
+`;
+
+export const NoIcon = styled.div`
+  font-size: 20px;
+
+  margin-right: 10px;
+  margin-top: 7px;
+
+  color: #ff6666;
+`;
+
+export const Nothing = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Darker Grotesque";
+  font-size: 20px;
+  font-weight: 400;
+`;

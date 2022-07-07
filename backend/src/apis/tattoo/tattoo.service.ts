@@ -11,6 +11,7 @@ export class TattooService {
     private readonly tattooRepository: Repository<Tattoo>,
   ) {}
 
+  // 타투 게시글 생성
   create({ createTattooInput }) {
     const { tattooGenreId, tattooist, ...rest } = createTattooInput;
     const result = this.tattooRepository.save({
@@ -22,14 +23,12 @@ export class TattooService {
   }
 
   // 타투 목록 전체 조회
-  async findAll() {
-    return await this.tattooRepository.find({
-      relations: ['tattooGenre', 'tattooist'],
-    });
-  }
-
-  // 장르별 조회
-  async findByGenre({ tattooGenreId }) {
+  async findAll({ tattooGenreId }) {
+    if (tattooGenreId === 0) {
+      return await this.tattooRepository.find({
+        relations: ['tattooGenre', 'tattooist'],
+      });
+    }
     return await this.tattooRepository.find({
       where: { tattooGenre: tattooGenreId },
       relations: ['tattooGenre', 'tattooist'],
@@ -64,6 +63,14 @@ export class TattooService {
       },
     });
   }
+
+  // 각각 장르중 베스트 3개 fetch
+  // async hotGenre({ tattooGenreId }) {
+  //   return await this.tattooRepository.find({
+  //     where: { tattooGenre: tattooGenreId },
+  //     relations: ['tattooGenre', 'tattooist'],
+  //   });
+  // }
 
   async update({ tattooId, updateTattooInput }) {
     const tattoo = await this.tattooRepository.findOne({

@@ -5,10 +5,11 @@ import { FaRegHeart } from "react-icons/fa";
 import * as T from "./tattoolist.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import { BsViewList } from "react-icons/bs";
+import { IoBanOutline } from "react-icons/io5";
 
 export const FETCH_TATTOOS = gql`
-  query fetchTattoos {
-    fetchTattoos {
+  query fetchTattoos($tattooGenreId: Float!) {
+    fetchTattoos(tattooGenreId: $tattooGenreId) {
       id
       name
       likes
@@ -20,13 +21,11 @@ export const FETCH_TATTOOS = gql`
 export default function TattooListContainer() {
   const [genreNum, setGenreNum] = useState(0);
 
-  // const { data: genreData } = useQuery(FETCH_TATTOO_WITH_GENRE, {
-  //   variables: {
-  //     tattooGenreId: genreNum,
-  //   },
-  // });
-
-  const { data } = useQuery(FETCH_TATTOOS);
+  const { data } = useQuery(FETCH_TATTOOS, {
+    variables: {
+      tattooGenreId: genreNum,
+    },
+  });
 
   const onClickDetail = (el) => (event) => {
     const recentData = JSON.parse(localStorage.getItem("Recent View") || "[]");
@@ -165,26 +164,35 @@ export default function TattooListContainer() {
         <T.SectionWrapper>
           <T.ContentTitle>New</T.ContentTitle>
           <T.DivisionLine />
-          <T.ContentWrapper>
-            {data?.fetchTattoos?.map((el) => (
-              <T.SingleTattooBox key={el.id} id={el.id}>
-                <T.TattooImage
-                  id={el.id}
-                  onClick={onClickDetail(el)}
-                  src={el.tattooImageUrl ? el.tattooImageUrl : "/default.png"}
-                />
-                <T.TattooInfoWrapper>
-                  <T.TattooInfo>{el.name}</T.TattooInfo>
-                  <T.LikesWrapper>
-                    <T.LikeIcon>
-                      <FaRegHeart />
-                    </T.LikeIcon>
-                    <T.TattooInfo>{el.likes}</T.TattooInfo>
-                  </T.LikesWrapper>
-                </T.TattooInfoWrapper>
-              </T.SingleTattooBox>
-            ))}
-          </T.ContentWrapper>
+          {data?.fetchTattoos.length > 0 ? (
+            <T.ContentWrapper>
+              {data?.fetchTattoos?.map((el) => (
+                <T.SingleTattooBox key={el.id} id={el.id}>
+                  <T.TattooImage
+                    id={el.id}
+                    onClick={onClickDetail(el)}
+                    src={el.tattooImageUrl ? el.tattooImageUrl : "/default.png"}
+                  />
+                  <T.TattooInfoWrapper>
+                    <T.TattooInfo>{el.name}</T.TattooInfo>
+                    <T.LikesWrapper>
+                      <T.LikeIcon>
+                        <FaRegHeart />
+                      </T.LikeIcon>
+                      <T.TattooInfo>{el.likes}</T.TattooInfo>
+                    </T.LikesWrapper>
+                  </T.TattooInfoWrapper>
+                </T.SingleTattooBox>
+              ))}
+            </T.ContentWrapper>
+          ) : (
+            <T.IconWrapper>
+              <T.NoIcon>
+                <IoBanOutline />
+              </T.NoIcon>
+              <T.Nothing>There aren't any tattoos uploaded yet</T.Nothing>
+            </T.IconWrapper>
+          )}
         </T.SectionWrapper>
       </T.OuterWrapper>
     </T.Wrapper>

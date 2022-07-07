@@ -50,11 +50,10 @@ type Review {
 }
 
 type Query {
-  fetchTattoos: [Tattoo!]!
+  fetchTattoos(tattooGenreId: Float!): [Tattoo!]!
   fetchTattoo(tattooId: String!): Tattoo!
   fetchPortfolios(tattooistId: String!): [Tattoo!]!
   fetchTattoosInTTPage(tattooistId: String!): [Tattoo!]!
-  fetchTattooByGenre(tattooGenreId: String!): [Tattoo!]!
   fetchTattooists: [User!]!
   fetchTattooist(tattooistId: String!): User!
   fetchUser(userId: String!): User!

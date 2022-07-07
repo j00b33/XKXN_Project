@@ -16,8 +16,8 @@ export class TattooResolver {
   }
 
   @Query(() => [Tattoo])
-  async fetchTattoos() {
-    return this.tattooService.findAll();
+  async fetchTattoos(@Args('tattooGenreId') tattooGenreId: number) {
+    return this.tattooService.findAll({ tattooGenreId });
   }
 
   @Query(() => Tattoo)
@@ -35,11 +35,6 @@ export class TattooResolver {
     return this.tattooService.fetchCreatedTattoos({ tattooistId });
   }
 
-  @Query(() => [Tattoo])
-  async fetchTattooByGenre(@Args('tattooGenreId') tattooGenreId: string) {
-    return this.tattooService.findByGenre({ tattooGenreId });
-  }
-
   @Mutation(() => Tattoo)
   async updateTattoo(
     @Args('updateTattooInput') updateTattooInput: UpdateTattooInput,
@@ -47,4 +42,9 @@ export class TattooResolver {
   ) {
     return await this.tattooService.update({ tattooId, updateTattooInput });
   }
+
+  // @Query(() => [Tattoo])
+  // async fetchHotTattoosByGenre(@Args('tattooGenreId') tattooGenreId: number) {
+  //   return this.tattooService.hotGenre({ tattooGenreId });
+  // }
 }
