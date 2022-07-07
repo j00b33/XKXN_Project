@@ -22,7 +22,7 @@ export default function ReviewsContainer() {
   });
 
   const onClickDetail = (event) => {
-    router.push(`/review/${event.currentTarget.id}`);
+    router.push(`/reviewDetail/${event.currentTarget.id}`);
   };
 
   return (

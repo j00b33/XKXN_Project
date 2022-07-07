@@ -26,7 +26,7 @@ export default function TattooistListContainer() {
   };
 
   const onClickUploadReview = (event) => {
-    router.push("/review/upload");
+    router.push(`/review/upload`);
   };
 
   return (
