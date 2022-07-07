@@ -25,7 +25,7 @@ export default function TattooistListContainer() {
     router.push(`/user/tattooistPage/${event.currentTarget.id}`);
   };
 
-  const onClickUploadReview = (event) => {
+  const onClickUploadReview = () => {
     router.push(`/review/upload`);
   };
 
