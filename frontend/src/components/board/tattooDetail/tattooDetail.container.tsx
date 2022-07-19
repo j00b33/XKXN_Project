@@ -9,6 +9,7 @@ import { MdOutlineCreditCardOff } from "react-icons/md";
 import { BsCheck2 } from "react-icons/bs";
 import * as D from "./tattooDetail.styles";
 import { useEffect, useState } from "react";
+import { Modal } from "antd";
 
 export const FETCH_TATTOO = gql`
   query fetchTattoo($tattooId: String!) {
@@ -37,6 +38,21 @@ export const FETCH_TATTOO = gql`
   }
 `;
 
+export const MARK_SOLD = gql`
+  mutation markSold($tattooId: String!) {
+    markSold(tattooId: $tattooId) {
+      id
+      isSold
+    }
+  }
+`;
+
+export const MARK_DONE = gql`
+  mutation markDone($tattooId: String!) {
+    markDone(tattooId: $tattooId)
+  }
+`;
+
 // export const CREATE_RECEIPT = gql`
 //   mutation createReceipt($impUid: String!, $price: Float!, $tattooId: String!) {
 //     createReceipt(impUid: $impUid, price: $price, tattooId: $tattooId) {
@@ -57,6 +73,8 @@ export default function TattooDetailContainer() {
     variables: { tattooId: String(router.query.tattooDetail) },
   });
 
+  console.log("🖐", data?.fetchTattoo?.id);
+
   const onClickList = () => {
     router.push("/board/tattooList");
   };
@@ -69,8 +87,39 @@ export default function TattooDetailContainer() {
     setIsLiked((prev) => !prev);
   };
 
-  const onClickDone = () => {
-    setIsDone(true);
+  const [markDone] = useMutation(MARK_DONE);
+
+  const onClickDone = async () => {
+    try {
+      await markDone({
+        variables: {
+          tattooId: String(data?.fetchTattoo?.id),
+        },
+      });
+      setIsDone(true);
+      Modal.success({
+        content: "Marked Done",
+      });
+    } catch (error) {
+      Modal.error({ content: "Error" });
+    }
+  };
+
+  const [markSold] = useMutation(MARK_SOLD);
+
+  const onClickSold = async () => {
+    try {
+      await markSold({
+        variables: {
+          tattooId: String(data?.fetchTattoo?.id),
+        },
+      });
+      Modal.success({
+        content: "Tattoo Successfully Registered",
+      });
+    } catch (error) {
+      Modal.error({ content: "Error" });
+    }
   };
 
   useEffect(() => {
@@ -180,29 +229,33 @@ export default function TattooDetailContainer() {
               <D.ToolText>{data?.fetchTattoo.likes} Likes</D.ToolText>
             </D.SingleTool>
 
-            <D.SingleTool>
-              <D.ToolIcon>
-                {data?.fetchTattoo.isSold ? (
-                  <MdOutlineCreditCardOff />
-                ) : (
-                  <AiOutlineCreditCard />
-                )}
-              </D.ToolIcon>
-              <D.ToolText>
-                {data?.fetchTattoo.isSold ? "Registerd" : "Register"}
-              </D.ToolText>
-            </D.SingleTool>
-
-            {data?.fetchTattoo.isSold ? (
-              <D.SingleTool onClick={onClickDone}>
-                <D.ToolIcon>
-                  <BsCheck2 />
+            {data?.fetchTattoo.isDone ? null : (
+              <D.SingleTool>
+                <D.ToolIcon onClick={onClickSold}>
+                  {data?.fetchTattoo.isSold ? (
+                    <MdOutlineCreditCardOff />
+                  ) : (
+                    <AiOutlineCreditCard />
+                  )}
                 </D.ToolIcon>
                 <D.ToolText>
-                  {data?.fetchTattoo.isDone ? "Done" : "Mark Done"}
+                  {data?.fetchTattoo.isSold ? "Registerd" : "Register"}
                 </D.ToolText>
               </D.SingleTool>
-            ) : null}
+            )}
+
+            {data?.fetchTattoo.isPortfolio ? null : (
+              <D.SingleTool onClick={onClickDone}>
+                {data?.fetchTattoo.isDone ? null : (
+                  <D.ToolIcon>
+                    <BsCheck2 />
+                  </D.ToolIcon>
+                )}
+                {data?.fetchTattoo.isDone ? null : (
+                  <D.ToolText>Mark Done</D.ToolText>
+                )}
+              </D.SingleTool>
+            )}
           </D.Tools>
         </D.InfoWrapper>
       </D.MainWrapper>

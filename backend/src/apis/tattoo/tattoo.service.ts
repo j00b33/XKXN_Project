@@ -84,4 +84,36 @@ export class TattooService {
 
     return await this.tattooRepository.save(updatedTattoo);
   }
+
+  async markSold({ tattooId }) {
+    const tattoo = await this.tattooRepository.findOne({
+      where: { id: tattooId },
+    });
+
+    const updateTattoo = {
+      ...tattoo,
+      isSold: true,
+    };
+
+    return await this.tattooRepository.save(updateTattoo);
+  }
+
+  async markDone({ tattooId }) {
+    const tattoo = await this.tattooRepository.findOne({
+      where: { id: tattooId },
+    });
+
+    if (!tattoo.isSold) {
+      return "This tattoo isn't registered";
+    }
+
+    const updateTattoo = {
+      ...tattoo,
+      isDone: true,
+    };
+
+    await this.tattooRepository.save(updateTattoo);
+
+    return 'Marked Done';
+  }
 }
