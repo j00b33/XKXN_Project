@@ -63,8 +63,13 @@ export class TattooResolver {
     return await this.tattooService.cancelLike({ tattooId });
   }
 
-  // @Query(() => [Tattoo])
-  // async fetchHotTattoosByGenre(@Args('tattooGenreId') tattooGenreId: number) {
-  //   return this.tattooService.hotGenre({ tattooGenreId });
-  // }
+  @Query(() => [Tattoo])
+  async fetchHotTattoos() {
+    return this.tattooService.fetchHot();
+  }
+
+  @Query(() => [Tattoo])
+  async fetchHotTattoosByGenre(@Args('tattooGenreId') tattooGenreId: number) {
+    return this.tattooService.hotGenre({ tattooGenreId });
+  }
 }

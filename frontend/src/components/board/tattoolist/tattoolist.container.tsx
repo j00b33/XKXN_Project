@@ -18,6 +18,28 @@ export const FETCH_TATTOOS = gql`
   }
 `;
 
+export const FETCH_HOT_TATTOOS = gql`
+  query fetchHotTattoos {
+    fetchHotTattoos {
+      id
+      name
+      likes
+      tattooImageUrl
+    }
+  }
+`;
+
+export const FETCH_HOT_TATTOOS_BY_GENRE = gql`
+  query fetchHotTattoosByGenre($tattooGenreId: Float!) {
+    fetchHotTattoosByGenre(tattooGenreId: $tattooGenreId) {
+      id
+      name
+      likes
+      tattooImageUrl
+    }
+  }
+`;
+
 export default function TattooListContainer() {
   const [genreNum, setGenreNum] = useState(0);
 
@@ -26,6 +48,14 @@ export default function TattooListContainer() {
       tattooGenreId: genreNum,
     },
   });
+
+  const { data: hotData } = useQuery(FETCH_HOT_TATTOOS_BY_GENRE, {
+    variables: {
+      tattooGenreId: genreNum,
+    },
+  });
+
+  const { data: bestHot } = useQuery(FETCH_HOT_TATTOOS);
 
   const onClickDetail = (el) => (event) => {
     const recentData = JSON.parse(localStorage.getItem("Recent View") || "[]");
@@ -47,23 +77,6 @@ export default function TattooListContainer() {
 
     router.push(`/board/${event.currentTarget.id}`);
   };
-
-  // ========
-  // if (localStorage.getItem("test")) {
-  //   let arr = JSON.parse(localStorage.getItem("test"));
-  //   console.log(arr);
-  //   if (arr.length < 4) {
-  //     arr.push(str);
-  //     localStorage.setItem("test", JSON.stringify(arr));
-  //   } else {
-  //     arr.shift();
-  //     arr.push(str);
-  //     localStorage.setItem("test", JSON.stringify(arr));
-  //   }
-  // } else {
-  //   localStorage.setItem("test", JSON.stringify([str]));
-  // }
-  // =========
 
   const router = useRouter();
 
@@ -99,6 +112,11 @@ export default function TattooListContainer() {
     setGenreNum(8);
   };
 
+  // if (hotData?.fetchHotTattoosByGenre.length > 3) {
+  //   const realHotData = hotData?.fetchHotTattoosByGenre.slice(0, 2);
+  //   console.log(realHotData);
+  // }
+
   return (
     <T.Wrapper>
       <T.CategoryWrapper>
@@ -119,46 +137,50 @@ export default function TattooListContainer() {
         <T.SectionWrapper>
           <T.ContentTitle>Hot</T.ContentTitle>
           <T.DivisionLine />
-          <T.ContentWrapper>
-            <T.SingleTattooBox>
-              <T.TattooImage src="/dummytattoo.png" />
-              <T.TattooInfoWrapper>
-                <T.TattooInfo>Dummy Data</T.TattooInfo>
-                <T.LikesWrapper>
-                  <T.LikeIcon>
-                    <FaRegHeart />
-                  </T.LikeIcon>
-                  <T.TattooInfo>13,257</T.TattooInfo>
-                </T.LikesWrapper>
-              </T.TattooInfoWrapper>
-            </T.SingleTattooBox>
 
-            <T.SingleTattooBox>
-              <T.TattooImage src="/dummytattoo.png" />
-              <T.TattooInfoWrapper>
-                <T.TattooInfo>Dummy Data</T.TattooInfo>
-                <T.LikesWrapper>
-                  <T.LikeIcon>
-                    <FaRegHeart />
-                  </T.LikeIcon>
-                  <T.TattooInfo>13,257</T.TattooInfo>
-                </T.LikesWrapper>
-              </T.TattooInfoWrapper>
-            </T.SingleTattooBox>
-
-            <T.SingleTattooBox>
-              <T.TattooImage src="/dummytattoo.png" />
-              <T.TattooInfoWrapper>
-                <T.TattooInfo>Dummy Data</T.TattooInfo>
-                <T.LikesWrapper>
-                  <T.LikeIcon>
-                    <FaRegHeart />
-                  </T.LikeIcon>
-                  <T.TattooInfo>13,257</T.TattooInfo>
-                </T.LikesWrapper>
-              </T.TattooInfoWrapper>
-            </T.SingleTattooBox>
-          </T.ContentWrapper>
+          {genreNum ? (
+            <T.ContentWrapper>
+              {hotData?.fetchHotTattoosByGenre.slice(0, 3)?.map((el) => (
+                <T.SingleTattooBox key={el.id} id={el.id}>
+                  <T.TattooImage
+                    id={el.id}
+                    onClick={onClickDetail(el)}
+                    src={el.tattooImageUrl ? el.tattooImageUrl : "/default.png"}
+                  />
+                  <T.TattooInfoWrapper>
+                    <T.TattooInfo>{el.name}</T.TattooInfo>
+                    <T.LikesWrapper>
+                      <T.LikeIcon>
+                        <FaRegHeart />
+                      </T.LikeIcon>
+                      <T.TattooInfo>{el.likes}</T.TattooInfo>
+                    </T.LikesWrapper>
+                  </T.TattooInfoWrapper>
+                </T.SingleTattooBox>
+              ))}
+            </T.ContentWrapper>
+          ) : (
+            <T.ContentWrapper>
+              {bestHot?.fetchHotTattoos.slice(0, 3)?.map((el) => (
+                <T.SingleTattooBox key={el.id} id={el.id}>
+                  <T.TattooImage
+                    id={el.id}
+                    onClick={onClickDetail(el)}
+                    src={el.tattooImageUrl ? el.tattooImageUrl : "/default.png"}
+                  />
+                  <T.TattooInfoWrapper>
+                    <T.TattooInfo>{el.name}</T.TattooInfo>
+                    <T.LikesWrapper>
+                      <T.LikeIcon>
+                        <FaRegHeart />
+                      </T.LikeIcon>
+                      <T.TattooInfo>{el.likes}</T.TattooInfo>
+                    </T.LikesWrapper>
+                  </T.TattooInfoWrapper>
+                </T.SingleTattooBox>
+              ))}
+            </T.ContentWrapper>
+          )}
         </T.SectionWrapper>
 
         <T.SectionWrapper>

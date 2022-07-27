@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../user/entities/user.entity';
 import { Tattoo } from './entities/tattoo.entity';
 
 @Injectable()
@@ -64,13 +63,23 @@ export class TattooService {
     });
   }
 
+  async fetchHot() {
+    return await this.tattooRepository
+      .createQueryBuilder('tattoo')
+      .orderBy('tattoo.likes', 'DESC')
+      .getMany();
+  }
+
   // 각각 장르중 베스트 3개 fetch
-  // async hotGenre({ tattooGenreId }) {
-  //   return await this.tattooRepository.find({
-  //     where: { tattooGenre: tattooGenreId },
-  //     relations: ['tattooGenre', 'tattooist'],
-  //   });
-  // }
+  async hotGenre({ tattooGenreId }) {
+    return await this.tattooRepository
+      .createQueryBuilder('tattoo')
+      .where('tattoo.tattooGenre = :tattooGenre', {
+        tattooGenre: tattooGenreId,
+      })
+      .orderBy('tattoo.likes', 'DESC')
+      .getMany();
+  }
 
   async update({ tattooId, updateTattooInput }) {
     const tattoo = await this.tattooRepository.findOne({
