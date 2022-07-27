@@ -7,11 +7,11 @@ export default function LayoutFooter() {
   const router = useRouter();
 
   const onClickInstagram = () => {
-    router.push("https://www.instagram.com/_pzzzb/");
+    window.open("https://www.instagram.com/_pzzzb/");
   };
 
   const onClickKakao = () => {
-    router.push("https://open.kakao.com/o/s9DcyRbe");
+    window.open("https://open.kakao.com/o/s9DcyRbe");
   };
 
   return (

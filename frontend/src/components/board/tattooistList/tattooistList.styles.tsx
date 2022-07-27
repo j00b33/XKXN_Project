@@ -61,6 +61,7 @@ export const HeartIcon = styled.div`
   margin-right: 5px;
   font-size: 17px;
   margin-top: 7px;
+  color: grey;
 `;
 
 export const UserName = styled.div`

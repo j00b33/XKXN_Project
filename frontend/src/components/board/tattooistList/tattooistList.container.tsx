@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import * as T from "./tattooistList.styles";
 
 export const FETCH_TATTOOISTS = gql`
@@ -42,7 +42,7 @@ export default function TattooistListContainer() {
             <T.UserInfo>{el.email}</T.UserInfo>
             <T.UserLikesWrapper>
               <T.HeartIcon>
-                <FaRegHeart />
+                <FaHeart />
               </T.HeartIcon>
               <T.UserInfo>{el.likes} Likes</T.UserInfo>
             </T.UserLikesWrapper>
