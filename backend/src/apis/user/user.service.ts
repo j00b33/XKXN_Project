@@ -57,4 +57,30 @@ export class UserService {
 
     return await this.userRepository.save(updatedUser);
   }
+
+  async likeTattooist({ tattooistId }) {
+    const tattooist = await this.userRepository.findOne({
+      where: { id: tattooistId },
+    });
+
+    await this.userRepository.update(
+      { id: tattooistId },
+      { likes: tattooist.likes + 1 },
+    );
+
+    return 'Liked Tattooist';
+  }
+
+  async cancelLike({ tattooistId }) {
+    const tattooist = await this.userRepository.findOne({
+      where: { id: tattooistId },
+    });
+
+    await this.userRepository.update(
+      { id: tattooistId },
+      { likes: tattooist.likes - 1 },
+    );
+
+    return 'Canceled like';
+  }
 }

@@ -38,4 +38,14 @@ export class UserResolver {
   ) {
     return await this.userService.update({ userId, updateUserInput });
   }
+
+  @Mutation(() => String)
+  async likeTattooist(@Args('tattooistId') tattooistId: string) {
+    return await this.userService.likeTattooist({ tattooistId });
+  }
+
+  @Mutation(() => String)
+  async cancelLikeTattooist(@Args('tattooistId') tattooistId: string) {
+    return await this.userService.cancelLike({ tattooistId });
+  }
 }

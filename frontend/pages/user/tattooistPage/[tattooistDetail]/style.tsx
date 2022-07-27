@@ -45,6 +45,16 @@ export const UserInfo = styled.div`
   font-family: "Darker Grotesque";
 `;
 
+export const Instagram = styled.div`
+  margin-top: 10px;
+  font-size: 20px;
+  color: grey;
+  cursor: pointer;
+  :hover {
+    color: black;
+  }
+`;
+
 export const DivisionLine = styled.div`
   border: 1px solid #bdbdbd;
   margin-top: 20px;
@@ -61,7 +71,7 @@ export const ContactWrapper = styled.div`
   height: 50px;
   width: 140px;
 
-  margin-top: 10px;
+  margin-top: 20px;
 `;
 
 export const ContactTextWrapper = styled.div`
@@ -95,6 +105,8 @@ export const LikeIcon = styled.div`
   color: #ff6666;
   margin-top: 7px;
   margin-right: 5px;
+
+  cursor: pointer;
 `;
 
 export const Likes = styled.div`

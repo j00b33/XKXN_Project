@@ -53,6 +53,18 @@ export const MARK_DONE = gql`
   }
 `;
 
+export const LIKE_TATTOO = gql`
+  mutation likeTattoo($tattooId: String!) {
+    likeTattoo(tattooId: $tattooId)
+  }
+`;
+
+export const CANCEL_LIKE_TATTOO = gql`
+  mutation cancelLikeTattoo($tattooId: String!) {
+    cancelLikeTattoo(tattooId: $tattooId)
+  }
+`;
+
 // export const CREATE_RECEIPT = gql`
 //   mutation createReceipt($impUid: String!, $price: Float!, $tattooId: String!) {
 //     createReceipt(impUid: $impUid, price: $price, tattooId: $tattooId) {
@@ -73,8 +85,6 @@ export default function TattooDetailContainer() {
     variables: { tattooId: String(router.query.tattooDetail) },
   });
 
-  console.log("🖐", data?.fetchTattoo?.id);
-
   const onClickList = () => {
     router.push("/board/tattooList");
   };
@@ -83,8 +93,42 @@ export default function TattooDetailContainer() {
     router.push(`/board/${event.currentTarget.id}`);
   };
 
-  const onClickLike = () => {
+  const [likeTattoo] = useMutation(LIKE_TATTOO);
+  const [cancelLikeTattoo] = useMutation(CANCEL_LIKE_TATTOO);
+
+  const onClickLike = async () => {
     setIsLiked((prev) => !prev);
+
+    if (isLiked === true) {
+      await cancelLikeTattoo({
+        variables: {
+          tattooId: String(data?.fetchTattoo?.id),
+        },
+        refetchQueries: [
+          {
+            query: FETCH_TATTOO,
+            variables: {
+              tattooId: String(data?.fetchTattoo?.id),
+            },
+          },
+        ],
+      });
+    }
+    if (isLiked === false) {
+      await likeTattoo({
+        variables: {
+          tattooId: String(data?.fetchTattoo?.id),
+        },
+        refetchQueries: [
+          {
+            query: FETCH_TATTOO,
+            variables: {
+              tattooId: String(data?.fetchTattoo?.id),
+            },
+          },
+        ],
+      });
+    }
   };
 
   const [markDone] = useMutation(MARK_DONE);
@@ -95,6 +139,14 @@ export default function TattooDetailContainer() {
         variables: {
           tattooId: String(data?.fetchTattoo?.id),
         },
+        refetchQueries: [
+          {
+            query: FETCH_TATTOO,
+            variables: {
+              tattooId: String(data?.fetchTattoo?.id),
+            },
+          },
+        ],
       });
       setIsDone(true);
       Modal.success({
@@ -113,6 +165,14 @@ export default function TattooDetailContainer() {
         variables: {
           tattooId: String(data?.fetchTattoo?.id),
         },
+        refetchQueries: [
+          {
+            query: FETCH_TATTOO,
+            variables: {
+              tattooId: String(data?.fetchTattoo?.id),
+            },
+          },
+        ],
       });
       Modal.success({
         content: "Tattoo Successfully Registered",

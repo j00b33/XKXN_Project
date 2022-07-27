@@ -116,4 +116,30 @@ export class TattooService {
 
     return 'Marked Done';
   }
+
+  async likeTattoo({ tattooId }) {
+    const tattoo = await this.tattooRepository.findOne({
+      where: { id: tattooId },
+    });
+
+    await this.tattooRepository.update(
+      { id: tattooId },
+      { likes: tattoo.likes + 1 },
+    );
+
+    return 'Liked Tattoo';
+  }
+
+  async cancelLike({ tattooId }) {
+    const tattoo = await this.tattooRepository.findOne({
+      where: { id: tattooId },
+    });
+
+    await this.tattooRepository.update(
+      { id: tattooId },
+      { likes: tattoo.likes - 1 },
+    );
+
+    return 'Canceled Like';
+  }
 }

@@ -66,9 +66,13 @@ type Mutation {
   updateTattoo(updateTattooInput: UpdateTattooInput!, tattooId: String!): Tattoo!
   markSold(tattooId: String!): Tattoo!
   markDone(tattooId: String!): String!
+  likeTattoo(tattooId: String!): String!
+  cancelLikeTattoo(tattooId: String!): String!
   createTattooGenre(genre: String!): TattooGenre!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!, userId: String!): User!
+  likeTattooist(tattooistId: String!): String!
+  cancelLikeTattooist(tattooistId: String!): String!
   createReview(createReviewInput: CreateReviewInput!): Review!
 }
 
