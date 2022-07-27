@@ -48,4 +48,9 @@ export class UserResolver {
   async cancelLikeTattooist(@Args('tattooistId') tattooistId: string) {
     return await this.userService.cancelLike({ tattooistId });
   }
+
+  @Query(() => [User])
+  async fetchHotTattooists() {
+    return this.userService.fetchHot();
+  }
 }

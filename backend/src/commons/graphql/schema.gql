@@ -59,6 +59,7 @@ type Query {
   fetchTattooists: [User!]!
   fetchTattooist(tattooistId: String!): User!
   fetchUser(userId: String!): User!
+  fetchHotTattooists: [User!]!
   fetchReview(reviewId: String!): Review!
   fetchReviews(tattooistId: String!): [Review!]!
 }

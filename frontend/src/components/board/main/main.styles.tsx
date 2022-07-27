@@ -87,13 +87,17 @@ export const SingleTattoo = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-between;
-  height: 174px;
+  height: 190px;
   width: 120px;
 `;
 
 export const BestImage = styled.img`
   width: 120px;
   height: 120px;
+
+  object-fit: cover;
+
+  cursor: pointer;
 `;
 
 export const BestName = styled.div`
@@ -106,6 +110,8 @@ export const BestId = styled.div`
   font-family: "Darker Grotesque";
   font-weight: 400;
   font-size: 14px;
+
+  cursor: pointer;
 `;
 
 export const BestLikeWrapper = styled.div`
@@ -142,6 +148,6 @@ export const SingleTattooist = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  height: 174px;
+  height: 190px;
   width: 120px;
 `;

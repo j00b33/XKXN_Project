@@ -83,4 +83,11 @@ export class UserService {
 
     return 'Canceled like';
   }
+
+  async fetchHot() {
+    return await this.userRepository
+      .createQueryBuilder('tattooist')
+      .orderBy('tattooist.likes', 'DESC')
+      .getMany();
+  }
 }
