@@ -38,4 +38,8 @@ export class User {
   @Column({ default: 0 })
   @Field(() => Int)
   likes: number;
+
+  @Column()
+  @Field(() => Boolean)
+  igExists: boolean;
 }

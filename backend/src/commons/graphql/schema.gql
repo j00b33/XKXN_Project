@@ -16,6 +16,7 @@ type User {
   detail: String
   image: String
   likes: Int!
+  igExists: Boolean!
 }
 
 type Tattoo {
@@ -73,7 +74,7 @@ type Mutation {
   cancelLikeTattoo(tattooId: String!): String!
   createTattooGenre(genre: String!): TattooGenre!
   createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!, userId: String!): User!
+  updateUser(updateUserInput: UpdateUserInput!, userId: String!): String!
   likeTattooist(tattooistId: String!): String!
   cancelLikeTattooist(tattooistId: String!): String!
   createReview(createReviewInput: CreateReviewInput!): Review!
@@ -114,6 +115,7 @@ input CreateUserInput {
   detail: String
   image: String
   password: String!
+  igExists: Boolean!
 }
 
 input UpdateUserInput {
@@ -125,6 +127,7 @@ input UpdateUserInput {
   detail: String
   image: String
   password: String
+  igExists: Boolean
 }
 
 input CreateReviewInput {

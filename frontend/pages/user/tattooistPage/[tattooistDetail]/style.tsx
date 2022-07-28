@@ -6,8 +6,10 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin-top: 100px;
-  margin-bottom: 40px;
+  margin-top: 120px;
+  margin-bottom: 20px;
+
+  position: relative;
 `;
 
 export const MainWrapper = styled.div`
@@ -53,6 +55,19 @@ export const Instagram = styled.div`
   :hover {
     color: black;
   }
+`;
+
+export const NameEditGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const EditIcon = styled.div`
+  margin-top: 10px;
+  margin-left: 10px;
+
+  cursor: pointer;
 `;
 
 export const DivisionLine = styled.div`
@@ -182,4 +197,72 @@ export const ContainerSection = styled.div`
 
   width: 470px;
   height: 470px;
+`;
+
+// ============== Edit Modal CSS =============
+export const EditModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: white;
+
+  width: 700px;
+  height: 340px;
+
+  position: absolute;
+
+  border: 1px solid #4b4b4b;
+`;
+
+export const EditHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+
+  margin-top: 15px;
+`;
+
+export const EditSelection = styled.div`
+  font-family: "Darker Grotesque";
+  font-size: 20px;
+
+  margin-bottom: 10px;
+
+  cursor: pointer;
+
+  transition: 0.4s;
+`;
+
+export const EditDivisionLine = styled.div`
+  width: 600px;
+  border: 0.6px solid black;
+`;
+
+export const Editcontent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 35px;
+
+  width: 400px;
+`;
+
+export const Quit = styled.div`
+  margin-top: 10px;
+
+  margin-left: 620px;
+
+  cursor: pointer;
+  :hover {
+    color: grey;
+  }
+
+  text-align: right;
+
+  font-size: 20px;
 `;

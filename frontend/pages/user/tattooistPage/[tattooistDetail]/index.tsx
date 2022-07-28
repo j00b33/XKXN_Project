@@ -1,6 +1,7 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { GrEdit } from "react-icons/gr";
 import { useState } from "react";
 import { IoLogoInstagram } from "react-icons/io5";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -8,6 +9,8 @@ import CreatedTattooContainer from "../../../../src/components/user/createdTatto
 import PortfoliosContainer from "../../../../src/components/user/portfolios/portfolios.container";
 import ReviewsContainer from "../../../../src/components/user/reviews/reviews.container";
 import * as P from "./style";
+import EditMainInfoContainer from "../../../../src/components/user/edit/editMainInfo.container";
+import ChangePasswordContainer from "../../../../src/components/user/edit/changePassword.container";
 
 export const FETCH_TATTOOIST = gql`
   query fetchTattooist($tattooistId: String!) {
@@ -19,6 +22,7 @@ export const FETCH_TATTOOIST = gql`
       detail
       email
       phoneNumber
+      igExists
     }
   }
 `;
@@ -62,6 +66,16 @@ export default function TattooistPage() {
     setCreated(false);
     setPortfolios(false);
     setReviews(true);
+  };
+
+  const [modal, setModal] = useState(false);
+
+  const onClickEdit = () => {
+    setModal(true);
+  };
+
+  const onClickEditOff = () => {
+    setModal(false);
   };
 
   const [liked, setLiked] = useState(false);
@@ -108,9 +122,21 @@ export default function TattooistPage() {
     window.open(`https://www.instagram.com/${data?.fetchTattooist?.id}/`);
   };
 
+  const [editMainInfo, setEditMainInfo] = useState(true);
+  const [changePw, setChangePw] = useState(false);
+  const onClickEditMainInfo = () => {
+    setEditMainInfo(true);
+    setChangePw(false);
+  };
+
+  const onClickChangePassword = () => {
+    setEditMainInfo(false);
+    setChangePw(true);
+  };
+
   return (
     <P.Wrapper>
-      <P.MainWrapper>
+      <P.MainWrapper style={{ filter: modal && "blur(10px)" }}>
         <P.DefaultSection>
           <P.Image
             src={
@@ -119,7 +145,12 @@ export default function TattooistPage() {
                 : "/default.png"
             }
           />
-          <P.Name>{data?.fetchTattooist?.name}</P.Name>
+          <P.NameEditGroup>
+            <P.Name>{data?.fetchTattooist?.name}</P.Name>
+            <P.EditIcon onClick={onClickEdit}>
+              <GrEdit />
+            </P.EditIcon>
+          </P.NameEditGroup>
           <P.UserInfo>@{data?.fetchTattooist?.id}</P.UserInfo>
           <P.DivisionLine />
 
@@ -136,7 +167,7 @@ export default function TattooistPage() {
           </P.ContactWrapper>
 
           <P.Instagram onClick={onClickInstagram}>
-            <IoLogoInstagram />
+            {data?.fetchTattooist?.igExists ? <IoLogoInstagram /> : null}
           </P.Instagram>
 
           <P.DivisionLine />
@@ -182,6 +213,35 @@ export default function TattooistPage() {
           {reviews && <ReviewsContainer />}
         </P.ContainerSection>
       </P.MainWrapper>
+      {/* Edit Modal goes here */}
+      {modal && (
+        <P.EditModalWrapper>
+          <P.Quit onClick={onClickEditOff}>X</P.Quit>
+          <P.EditHeader>
+            <P.EditSelection
+              onClick={onClickEditMainInfo}
+              style={{ color: editMainInfo ? "black" : "#bdbdbd" }}
+            >
+              Edit Main Info
+            </P.EditSelection>
+            <P.EditSelection
+              onClick={onClickChangePassword}
+              style={{ color: changePw ? "black" : "#bdbdbd" }}
+            >
+              Change Password
+            </P.EditSelection>
+          </P.EditHeader>
+          <P.EditDivisionLine />
+
+          <P.Editcontent>
+            {editMainInfo ? (
+              <EditMainInfoContainer />
+            ) : (
+              <ChangePasswordContainer />
+            )}
+          </P.Editcontent>
+        </P.EditModalWrapper>
+      )}
     </P.Wrapper>
   );
 }

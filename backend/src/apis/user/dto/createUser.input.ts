@@ -25,4 +25,7 @@ export class CreateUserInput {
 
   @Field(() => String)
   password: string;
+
+  @Field(() => Boolean)
+  igExists: boolean;
 }

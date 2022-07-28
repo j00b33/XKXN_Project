@@ -46,7 +46,7 @@ export class UserService {
   }
 
   async update({ userId, updateUserInput }) {
-    const user = this.userRepository.findOne({
+    const user = await this.userRepository.findOne({
       id: userId,
     });
 
@@ -55,7 +55,8 @@ export class UserService {
       ...updateUserInput,
     };
 
-    return await this.userRepository.save(updatedUser);
+    await this.userRepository.save(updatedUser);
+    return 'Successfully Updated';
   }
 
   async likeTattooist({ tattooistId }) {

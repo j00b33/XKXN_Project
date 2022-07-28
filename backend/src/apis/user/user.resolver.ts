@@ -31,7 +31,7 @@ export class UserResolver {
     return await this.userService.fetchUser({ userId });
   }
 
-  @Mutation(() => User)
+  @Mutation(() => String)
   async updateUser(
     @Args('updateUserInput') updateUserInput: UpdateUserInput,
     @Args('userId') userId: string,
