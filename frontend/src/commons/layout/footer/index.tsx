@@ -21,7 +21,7 @@ export default function LayoutFooter() {
         <F.Text>Founder: JB Park</F.Text>
         <F.Text>Company Name: KNOCK NASTY</F.Text>
         <F.Text>Address: Somewhere on Earth</F.Text>
-        <F.Text></F.Text>
+        <F.Text>Establised Date : 21st of June 2022</F.Text>
       </F.LeftBody>
 
       <F.RightBody>

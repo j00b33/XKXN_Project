@@ -28,6 +28,8 @@ export const Body = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  /* background: #5c5c5c; */
 `;
 
 export const LeftBody = styled.div`
