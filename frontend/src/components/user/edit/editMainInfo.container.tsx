@@ -45,6 +45,14 @@ export default function EditMainInfoContainer() {
           detail,
         },
       },
+      refetchQueries: [
+        {
+          query: FETCH_TATTOOIST,
+          variables: {
+            tattooistId: String(router.query.tattooistDetail),
+          },
+        },
+      ],
     });
     Modal.success({ content: "Successfully Updated" });
   };

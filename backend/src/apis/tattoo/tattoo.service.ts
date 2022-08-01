@@ -66,8 +66,8 @@ export class TattooService {
   async fetchHot() {
     return await this.tattooRepository
       .createQueryBuilder('tattoo')
-      .leftJoinAndSelect('tattoo.tattooGenre', 'tattooGenre')
       .leftJoinAndSelect('tattoo.tattooist', 'tattooist')
+      .leftJoinAndSelect('tattoo.tattooGenre', 'tattooGenre')
       .orderBy('tattoo.likes', 'DESC')
       .getMany();
   }

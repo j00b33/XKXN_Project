@@ -15,9 +15,7 @@ export const FETCH_HOT_TATTOOS = gql`
         id
         genre
       }
-      tattooist {
-        id
-      }
+      price
     }
   }
 `;
@@ -99,9 +97,7 @@ export default function MainPageContainer() {
                   src={el.tattooImageUrl ? el.tattooImageUrl : "/default.png"}
                 />
                 <M.BestName>{el.name}</M.BestName>
-                <M.BestId onClick={onClickTattooist} id={el.tattooist.id}>
-                  @{el.tattooist.id}
-                </M.BestId>
+                <M.BestId id={el.price}>$ {el.price}</M.BestId>
                 <M.BestLikeWrapper>
                   <M.HeartIcon>
                     <FaRegHeart />
