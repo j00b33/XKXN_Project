@@ -53,8 +53,10 @@ export const Instagram = styled.div`
   color: grey;
   cursor: pointer;
   :hover {
-    color: black;
+    color: #d56ba2;
   }
+
+  transition: 0.4s;
 `;
 
 export const NameEditGroup = styled.div`
