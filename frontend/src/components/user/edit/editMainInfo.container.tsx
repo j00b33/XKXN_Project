@@ -1,4 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { Checkbox } from "@mui/material";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -11,6 +12,7 @@ export const FETCH_TATTOOIST = gql`
       name
       detail
       phoneNumber
+      igExists
     }
   }
 `;
@@ -35,6 +37,32 @@ export default function EditMainInfoContainer() {
 
   const [updateUser] = useMutation(UPDATE_USER);
 
+  const [igExists, setIgExists] = useState(data?.fetchTattooist.igExists);
+  const onClickExists = () => {
+    setIgExists(true);
+    Modal.info({
+      content: "Your ig ID should match tattooist ID",
+    });
+  };
+
+  const onClickNoExist = () => {
+    setIgExists(false);
+  };
+
+  console.log(igExists, "👽", data?.fetchTattooist.igExists);
+
+  const onChangeName = (event) => {
+    setName(event.currentTarget.value);
+  };
+
+  const onChangePN = (event) => {
+    setPhoneNumber(event.currentTarget.value);
+  };
+
+  const onChangeDetail = (event) => {
+    setDetail(event.currentTarget.value);
+  };
+
   const onClickUpdate = async () => {
     await updateUser({
       variables: {
@@ -43,6 +71,7 @@ export default function EditMainInfoContainer() {
           name,
           phoneNumber,
           detail,
+          igExists,
         },
       },
       refetchQueries: [
@@ -55,18 +84,6 @@ export default function EditMainInfoContainer() {
       ],
     });
     Modal.success({ content: "Successfully Updated" });
-  };
-
-  const onChangeName = (event) => {
-    setName(event.currentTarget.value);
-  };
-
-  const onChangePN = (event) => {
-    setPhoneNumber(event.currentTarget.value);
-  };
-
-  const onChangeDetail = (event) => {
-    setDetail(event.currentTarget.value);
   };
 
   return (
@@ -96,6 +113,24 @@ export default function EditMainInfoContainer() {
           defaultValue={data?.fetchTattooist.detail}
           onChange={onChangeDetail}
         />
+      </E.Single>
+
+      <E.Single>
+        <E.Subject>Instagram</E.Subject>
+        <E.SelectionBox>
+          <E.EachSelection onClick={onClickExists}>
+            <E.Selection
+              style={{ backgroundColor: igExists ? "black" : "white" }}
+            />
+            <E.SelectionText>Exist</E.SelectionText>
+          </E.EachSelection>
+          <E.EachSelection onClick={onClickNoExist}>
+            <E.Selection
+              style={{ backgroundColor: igExists ? "white" : "black" }}
+            />
+            <E.SelectionText>Un-exist</E.SelectionText>
+          </E.EachSelection>
+        </E.SelectionBox>
       </E.Single>
 
       <E.UpdateBtn onClick={onClickUpdate}>Update</E.UpdateBtn>

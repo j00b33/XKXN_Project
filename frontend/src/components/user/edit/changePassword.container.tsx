@@ -58,7 +58,7 @@ export default function ChangePasswordContainer() {
         <P.Input type="password" onChange={onChangeNew} />
       </P.Single>
 
-      <P.UpdateBtn onClick={onClickUpdate}>Update</P.UpdateBtn>
+      <P.ChangePWBTN onClick={onClickUpdate}>Update</P.ChangePWBTN>
     </P.Wrapper>
   );
 }

@@ -179,8 +179,12 @@ export default function LayoutHeader() {
             <RiSearchLine />
           </SearchIcon>
         </Search>
-        <JoinPlus onClick={loggedin ? onClickAddPost : onClickLogin}>
-          {loggedin ? <VscAdd /> : "Join"}
+        <JoinPlus
+          // onClick={loggedin ? onClickAddPost : onClickLogin}
+          onClick={onClickAddPost}
+        >
+          {/* {loggedin ? <VscAdd /> : "Join"} */}
+          <VscAdd />
         </JoinPlus>
 
         <Dropdown
