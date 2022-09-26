@@ -93,6 +93,10 @@ export default function TattooDetailContainer() {
     router.push(`/board/${event.currentTarget.id}`);
   };
 
+  const onClickTattooist = (event) => {
+    router.push(`/user/tattooistPage/${event.currentTarget.id}`);
+  };
+
   const [likeTattoo] = useMutation(LIKE_TATTOO);
   const [cancelLikeTattoo] = useMutation(CANCEL_LIKE_TATTOO);
 
@@ -236,10 +240,13 @@ export default function TattooDetailContainer() {
 
             {/* Header */}
             <D.SubHeader>
-              <D.SubHeaderText>
+              <D.TatooistName
+                onClick={onClickTattooist}
+                id={data?.fetchTattoo?.tattooist.id}
+              >
                 Tattooist {data?.fetchTattoo?.tattooist.name} :: @
                 {data?.fetchTattoo?.tattooist.id}
-              </D.SubHeaderText>
+              </D.TatooistName>
               <D.SubHeaderText>
                 {data?.fetchTattoo.date.slice(0, 10)}
               </D.SubHeaderText>

@@ -113,6 +113,13 @@ export const SubHeaderText = styled.div`
   font-size: 20px;
 `;
 
+export const TatooistName = styled.div`
+  font-family: "Darker Grotesque";
+  font-weight: 400;
+  font-size: 20px;
+  cursor: pointer;
+`;
+
 export const MainInfoWrapper = styled.div`
   margin-top: 22px;
   display: flex;
