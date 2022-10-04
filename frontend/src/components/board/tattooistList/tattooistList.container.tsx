@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -17,7 +18,19 @@ export const FETCH_TATTOOISTS = gql`
   }
 `;
 
+export const CREATE_REVIEW = gql`
+  mutation createReview($createReviewInput: CreateReviewInput!) {
+    createReview(createReviewInput: $createReviewInput) {
+      id
+      detail
+      rate
+      image
+    }
+  }
+`;
+
 export default function TattooistListContainer() {
+  const [createReview] = useMutation(CREATE_REVIEW);
   const { data } = useQuery(FETCH_TATTOOISTS);
   const router = useRouter();
 
@@ -25,7 +38,17 @@ export default function TattooistListContainer() {
     router.push(`/user/tattooistPage/${event.currentTarget.id}`);
   };
 
-  const onClickUploadReview = () => {
+  const onClickUploadReview = async (event) => {
+    await createReview({
+      variables: {
+        createReviewInput: {
+          tattooistId: event.currentTarget.id,
+          detail: " ",
+          rate: 5,
+          image: "",
+        },
+      },
+    });
     router.push(`/review/upload`);
   };
 
