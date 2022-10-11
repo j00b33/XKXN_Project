@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { Modal, Rate } from "antd";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as U from "./reviewUpload.style";
 
 export const CREATE_REVIEW = gql`
@@ -21,11 +21,6 @@ export default function ReviewUploadContainer() {
   const [detail, setDetail] = useState("");
   const [image, setImage] = useState("/default.png");
   const [rate, setRate] = useState(0);
-  const [tattooistId, setTattooistId] = useState("");
-
-  const onChangeID = (event) => {
-    setTattooistId(event.currentTarget.value);
-  };
 
   const onChangeDetail = (event) => {
     setDetail(event.currentTarget.value);
@@ -38,6 +33,23 @@ export default function ReviewUploadContainer() {
 
   const router = useRouter();
 
+  const [tattooistId, setTattooistId] = useState([]);
+  const [tattooistName, setTattooistName] = useState([]);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const rTattooistId = JSON.parse(
+        localStorage.getItem("R Tattooist Id" || "[]")
+      );
+      setTattooistId(rTattooistId);
+      console.log(rTattooistId);
+
+      const rTattooistName = JSON.parse(
+        localStorage.getItem("R Tattooist Name" || "[")
+      );
+      setTattooistName(rTattooistName);
+    }
+  }, []);
+
   const onClickUpload = async () => {
     try {
       const result = await createReview({
@@ -46,7 +58,7 @@ export default function ReviewUploadContainer() {
             detail,
             rate,
             image,
-            tattooistId,
+            tattooistId: tattooistId[0],
           },
         },
       });
@@ -66,8 +78,8 @@ export default function ReviewUploadContainer() {
 
         <U.ContentWrapper>
           <U.TitleWrapper>
-            <U.Title>Review of Tattoooist</U.Title>
-            <U.TitleInput onChange={onChangeID} placeholder="User ID" />
+            <U.Title>Review of Tattoooist </U.Title>
+            <U.Title>{tattooistName}</U.Title>
           </U.TitleWrapper>
           <Rate onChange={onChangeRate} value={rate} />
           <U.Detail

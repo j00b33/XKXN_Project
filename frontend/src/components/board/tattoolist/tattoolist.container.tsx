@@ -64,8 +64,6 @@ export default function TattooListContainer() {
       recentData.push(el);
     }
 
-    console.log("🫣", recentData.length);
-
     if (recentData.length < 5) {
       localStorage.setItem("Recent View", JSON.stringify(recentData));
     } else {

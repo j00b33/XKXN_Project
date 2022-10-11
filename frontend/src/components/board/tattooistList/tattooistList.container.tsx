@@ -18,19 +18,7 @@ export const FETCH_TATTOOISTS = gql`
   }
 `;
 
-export const CREATE_REVIEW = gql`
-  mutation createReview($createReviewInput: CreateReviewInput!) {
-    createReview(createReviewInput: $createReviewInput) {
-      id
-      detail
-      rate
-      image
-    }
-  }
-`;
-
 export default function TattooistListContainer() {
-  const [createReview] = useMutation(CREATE_REVIEW);
   const { data } = useQuery(FETCH_TATTOOISTS);
   const router = useRouter();
 
@@ -38,18 +26,32 @@ export default function TattooistListContainer() {
     router.push(`/user/tattooistPage/${event.currentTarget.id}`);
   };
 
-  const onClickUploadReview = async (event) => {
-    await createReview({
-      variables: {
-        createReviewInput: {
-          tattooistId: event.currentTarget.id,
-          detail: " ",
-          rate: 5,
-          image: "",
-        },
-      },
-    });
+  const onClickUploadReview = (el) => {
+    // localStorage에 리뷰 쓸 타투이스트 정보 넣기
+
+    // ID
+    const rTattooistId = JSON.parse(
+      localStorage.getItem("R Tattooist Id") || "[]"
+    );
+    if (rTattooistId.length > 0) {
+      rTattooistId.shift();
+    }
+    rTattooistId.push(el.id);
+    localStorage.setItem("R Tattooist Id", JSON.stringify(rTattooistId));
+
+    // Name
+    const rTattooistName = JSON.parse(
+      localStorage.getItem("R Tattooist Name") || "[]"
+    );
+    if (rTattooistName.length > 0) {
+      rTattooistName.shift();
+    }
+    rTattooistName.push(el.name);
+    localStorage.setItem("R Tattooist Name", JSON.stringify(rTattooistName));
+
+    // 경로 이동
     router.push(`/review/upload`);
+    console.log("Tattooist ID : ", rTattooistId);
   };
 
   return (
@@ -69,7 +71,10 @@ export default function TattooistListContainer() {
               </T.HeartIcon>
               <T.UserInfo>{el.likes} Likes</T.UserInfo>
             </T.UserLikesWrapper>
-            <T.ReviewButton onClick={onClickUploadReview} id={el.tattooist?.id}>
+            <T.ReviewButton
+              id={el.tattooist?.id}
+              onClick={() => onClickUploadReview(el)}
+            >
               + Review
             </T.ReviewButton>
           </T.Onebox>
