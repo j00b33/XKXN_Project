@@ -43,7 +43,7 @@ export default function MainPageContainer() {
   //   return bestTTISTLikes;
   // }
 
-  console.log(bestTattooist?.fetchHotTattooists[0]?.likes);
+  // console.log(bestTattooist?.fetchHotTattooists[0]?.likes);
 
   const router = useRouter();
 
@@ -54,7 +54,7 @@ export default function MainPageContainer() {
       recentData.push(el);
     }
 
-    console.log("🫣", recentData.length);
+    // console.log("🫣", recentData.length);
 
     if (recentData.length < 5) {
       localStorage.setItem("Recent View", JSON.stringify(recentData));
