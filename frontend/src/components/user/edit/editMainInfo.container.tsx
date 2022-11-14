@@ -49,7 +49,7 @@ export default function EditMainInfoContainer() {
     setIgExists(false);
   };
 
-  console.log(igExists, "👽", data?.fetchTattooist.igExists);
+  // console.log(igExists, "👽", data?.fetchTattooist.igExists);
 
   const onChangeName = (event) => {
     setName(event.currentTarget.value);

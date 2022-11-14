@@ -51,7 +51,7 @@ export default function TattooistListContainer() {
 
     // 경로 이동
     router.push(`/review/upload`);
-    console.log("Tattooist ID : ", rTattooistId);
+    // console.log("Tattooist ID : ", rTattooistId);
   };
 
   return (
@@ -69,7 +69,9 @@ export default function TattooistListContainer() {
               <T.HeartIcon>
                 <FaHeart />
               </T.HeartIcon>
-              <T.UserInfo>{el.likes} Likes</T.UserInfo>
+              <T.UserInfo>
+                {el.likes} {el.likes > 1 ? "Likes" : "Like"}
+              </T.UserInfo>
             </T.UserLikesWrapper>
             <T.ReviewButton
               id={el.tattooist?.id}

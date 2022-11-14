@@ -41,6 +41,7 @@ export const Onebox = styled.div`
   border: 1px solid black;
 
   margin-bottom: 21px;
+  box-shadow: 8px 6px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const UserImage = styled.img`
@@ -61,7 +62,7 @@ export const HeartIcon = styled.div`
   margin-right: 5px;
   font-size: 17px;
   margin-top: 7px;
-  color: grey;
+  color: #cb5555;
 `;
 
 export const UserName = styled.div`
@@ -93,7 +94,8 @@ export const ReviewButton = styled.div`
   justify-content: center;
 
   border: none;
-  background-color: #d9d9d9;
+  background-color: #4c4c4c;
+  color: white;
   border-radius: 25px;
 
   font-family: "Darker Grotesque";
@@ -105,8 +107,8 @@ export const ReviewButton = styled.div`
 
   cursor: pointer;
   :hover {
-    background-color: #4c4c4c;
-    color: white;
+    background-color: #8b8b8b;
+    color: black;
   }
 
   transition: 0.4s;
