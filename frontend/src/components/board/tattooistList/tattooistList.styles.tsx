@@ -74,7 +74,9 @@ export const UserName = styled.div`
   cursor: pointer;
 
   :hover {
-    color: #36839b;
+    /* color: #000000; */
+    /* font-size: 17px; */
+    text-shadow: 2px 2px 5px #56a5cc;
   }
 
   transition: 0.4s;
@@ -83,7 +85,6 @@ export const UserName = styled.div`
 export const UserInfo = styled.div`
   font-size: 15px;
   font-family: "Darker Grotesque";
-
   width: 110px;
 `;
 
@@ -107,8 +108,8 @@ export const ReviewButton = styled.div`
 
   cursor: pointer;
   :hover {
-    background-color: #8b8b8b;
-    color: black;
+    background-color: #727272;
+    /* color: black; */
   }
 
   transition: 0.4s;
