@@ -73,7 +73,7 @@ export default function ReviewUploadContainer() {
     <U.Wrapper>
       <U.MainWrapper>
         <U.ImageWrapper>
-          <U.Text>+ Upload Image</U.Text>
+          <U.Text>Upload Image</U.Text>
         </U.ImageWrapper>
 
         <U.ContentWrapper>

@@ -34,14 +34,16 @@ export const Onebox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  border-radius: 20px;
 
   width: 900px;
   height: 70px;
 
-  border: 1px solid black;
+  background-color: #4c4c4c;
+
+  /* border: 1px solid black; */
 
   margin-bottom: 21px;
-  box-shadow: 8px 6px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const UserImage = styled.img`
@@ -68,16 +70,11 @@ export const HeartIcon = styled.div`
 export const UserName = styled.div`
   font-size: 15px;
   font-family: "Darker Grotesque";
+  color: white;
 
   width: 110px;
 
   cursor: pointer;
-
-  :hover {
-    /* color: #000000; */
-    /* font-size: 17px; */
-    text-shadow: 2px 2px 5px #56a5cc;
-  }
 
   transition: 0.4s;
 `;
@@ -86,6 +83,7 @@ export const UserInfo = styled.div`
   font-size: 15px;
   font-family: "Darker Grotesque";
   width: 110px;
+  color: white;
 `;
 
 export const ReviewButton = styled.div`
@@ -95,9 +93,9 @@ export const ReviewButton = styled.div`
   justify-content: center;
 
   border: none;
-  background-color: #4c4c4c;
+  background-color: #000000;
   color: white;
-  border-radius: 25px;
+  border-radius: 10px;
 
   font-family: "Darker Grotesque";
   font-size: 15px;
@@ -108,7 +106,7 @@ export const ReviewButton = styled.div`
 
   cursor: pointer;
   :hover {
-    background-color: #727272;
+    background-color: #909090;
     /* color: black; */
   }
 

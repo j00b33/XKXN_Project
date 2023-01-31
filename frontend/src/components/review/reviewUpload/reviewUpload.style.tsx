@@ -37,7 +37,7 @@ export const ImageWrapper = styled.div`
 `;
 
 export const Text = styled.div`
-  font-size: 30px;
+  font-size: 20px;
   font-family: "Darker Grotesque";
   cursor: pointer;
   :hover {
