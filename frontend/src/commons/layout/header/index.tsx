@@ -73,6 +73,7 @@ const Search = styled.div`
   width: 321px;
   height: 34px;
   background: #f0f0f0;
+  /* border-radius: 15px; */
 
   display: flex;
   flex-direction: row;
@@ -101,8 +102,8 @@ const SearchIcon = styled.div`
 
 const JoinPlus = styled.div`
   font-family: "Barlow";
-  font-style: normal;
-  font-weight: 300;
+  /* font-style: normal; */
+  font-weight: 600;
   font-size: 15px;
 
   cursor: pointer;
@@ -112,7 +113,7 @@ const ProfilePic = styled.img`
   width: 35px;
   height: 35px;
   border-radius: 50px;
-  border: 1px solid black;
+  border: 2px solid black;
   overflow: auto;
 
   cursor: pointer;

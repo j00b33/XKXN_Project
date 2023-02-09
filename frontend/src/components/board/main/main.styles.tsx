@@ -30,7 +30,7 @@ export const BannerText = styled.div`
   font-weight: 500;
   font-size: 40px;
   color: #ffffff;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `;
 
 export const BannerDivisionLine = styled.div`

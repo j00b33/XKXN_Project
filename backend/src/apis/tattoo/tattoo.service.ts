@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { timeStamp } from 'console';
 import { Repository } from 'typeorm';
 import { Tattoo } from './entities/tattoo.entity';
 
