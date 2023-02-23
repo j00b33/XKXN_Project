@@ -120,14 +120,30 @@ export default function TattooListContainer() {
       <T.CategoryWrapper>
         <T.CategoryTitle>Categories</T.CategoryTitle>
         <T.Genres>
-          <T.Genre onClick={onClickOne}>Classic Americana</T.Genre>
-          <T.Genre onClick={onClickTwo}>New School</T.Genre>
-          <T.Genre onClick={onClickThree}>Black and Grey</T.Genre>
-          <T.Genre onClick={onClickFour}>Japanese</T.Genre>
-          <T.Genre onClick={onClickFive}>Realism</T.Genre>
-          <T.Genre onClick={onClickSix}>Protraiture</T.Genre>
-          <T.Genre onClick={onClickSeven}>Black Work</T.Genre>
-          <T.Genre onClick={onClickEight}>Stick and Poke</T.Genre>
+          <T.Genre num={1} genreNum={genreNum} onClick={onClickOne}>
+            Classic Americana
+          </T.Genre>
+          <T.Genre num={2} genreNum={genreNum} onClick={onClickTwo}>
+            New School
+          </T.Genre>
+          <T.Genre num={3} genreNum={genreNum} onClick={onClickThree}>
+            Black and Grey
+          </T.Genre>
+          <T.Genre num={4} genreNum={genreNum} onClick={onClickFour}>
+            Japanese
+          </T.Genre>
+          <T.Genre num={5} genreNum={genreNum} onClick={onClickFive}>
+            Realism
+          </T.Genre>
+          <T.Genre num={6} genreNum={genreNum} onClick={onClickSix}>
+            Protraiture
+          </T.Genre>
+          <T.Genre num={7} genreNum={genreNum} onClick={onClickSeven}>
+            Black Work
+          </T.Genre>
+          <T.Genre num={8} genreNum={genreNum} onClick={onClickEight}>
+            Stick and Poke
+          </T.Genre>
         </T.Genres>
       </T.CategoryWrapper>
 

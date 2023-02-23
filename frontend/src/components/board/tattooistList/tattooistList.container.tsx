@@ -27,7 +27,7 @@ export default function TattooistListContainer() {
   };
 
   const onClickUploadReview = (el) => {
-    // localStorage에 리뷰 쓸 타투이스트 정보 넣기
+    // localStorage에 리뷰 쓸 타투이스트 아이디 다이렉트로 넣기
 
     // ID
     const rTattooistId = JSON.parse(

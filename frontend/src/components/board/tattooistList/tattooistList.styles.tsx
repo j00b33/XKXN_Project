@@ -34,7 +34,7 @@ export const Onebox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  border-radius: 20px;
+  border-radius: 20px 0px 20px 0px;
 
   width: 900px;
   height: 70px;
@@ -77,6 +77,10 @@ export const UserName = styled.div`
   cursor: pointer;
 
   transition: 0.4s;
+
+  :hover {
+    color: #cb5555;
+  }
 `;
 
 export const UserInfo = styled.div`
@@ -106,7 +110,8 @@ export const ReviewButton = styled.div`
 
   cursor: pointer;
   :hover {
-    background-color: #545454;
+    /* background-color: #545454; */
+    background-color: #cb5555;
     /* color: black; */
   }
 

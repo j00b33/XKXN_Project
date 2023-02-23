@@ -50,12 +50,13 @@ export const Genre = styled.div`
   font-weight: 400;
   font-size: 20px;
 
-  color: #a0a0a0;
   cursor: pointer;
 
   :hover {
     color: #5d5d5d;
   }
+
+  color: ${(props) => (props.genreNum === props.num ? "#5d5d5d" : "#a0a0a0")};
 
   transition: 0.3s;
 `;
