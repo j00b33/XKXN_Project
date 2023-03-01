@@ -123,6 +123,7 @@ export default function MainPageContainer() {
                   src={el.image ? el.image : "/default.png"}
                 />
                 <M.BestName>{el.name}</M.BestName>
+
                 <M.BestId id={el.id} onClick={onClickTattooist}>
                   @{el.id}
                 </M.BestId>

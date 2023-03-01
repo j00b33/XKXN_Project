@@ -97,6 +97,8 @@ export default function TattooDetailContainer() {
     router.push(`/user/tattooistPage/${event.currentTarget.id}`);
   };
 
+  //currentTarget vs. target => event id taking difference
+
   const [likeTattoo] = useMutation(LIKE_TATTOO);
   const [cancelLikeTattoo] = useMutation(CANCEL_LIKE_TATTOO);
 
