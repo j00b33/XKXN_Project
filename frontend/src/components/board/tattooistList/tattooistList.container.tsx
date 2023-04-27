@@ -51,7 +51,7 @@ export default function TattooistListContainer() {
 
     // 경로 이동
     router.push(`/review/upload`);
-    // console.log("Tattooist ID : ", rTattooistId);
+    console.log("Tattooist ID : ", rTattooistId);
   };
 
   return (

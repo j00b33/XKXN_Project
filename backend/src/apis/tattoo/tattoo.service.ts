@@ -63,6 +63,7 @@ export class TattooService {
     });
   }
 
+  // highest likes
   async fetchHot() {
     return await this.tattooRepository
       .createQueryBuilder('tattoo')

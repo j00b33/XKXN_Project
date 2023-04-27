@@ -98,6 +98,11 @@ const SearchIcon = styled.div`
   justify-content: center;
 
   font-size: 20px;
+
+  :hover {
+    cursor: pointer;
+    color: #9e4141;
+  }
 `;
 
 const JoinPlus = styled.div`
