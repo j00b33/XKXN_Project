@@ -91,10 +91,11 @@ export default function TattooDetailContainer() {
 
   const onClickDetail = (el) => (event) => {
     router.push(`/board/${event.currentTarget.id}`);
+    console.log(event.target.id);
   };
 
   const onClickTattooist = (event) => {
-    router.push(`/user/tattooistPage/${event.currentTarget.id}`);
+    router.push(`/user/tattooistPage/${event.target.id}`);
   };
 
   //currentTarget vs. target => event id taking difference
