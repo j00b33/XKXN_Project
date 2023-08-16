@@ -66,7 +66,13 @@ export default function MainPageContainer() {
     localStorage.setItem("Recent View", JSON.stringify(recentData));
 
     router.push(`/board/${event.currentTarget.id}`);
-    console.log(event.currentTarget.id);
+    console.log(
+      "🍄🍄🍄🍄🍄🍄🍄",
+      el,
+      "🍄🍄🍄🍄🍄🍄🍄",
+      event,
+      event.currentTarget.id
+    );
   };
 
   const onClickTattooist = (event) => {
