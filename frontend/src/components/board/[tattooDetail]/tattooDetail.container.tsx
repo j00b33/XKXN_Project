@@ -65,6 +65,7 @@ export const CANCEL_LIKE_TATTOO = gql`
   }
 `;
 
+// (if needed)
 // export const CREATE_RECEIPT = gql`
 //   mutation createReceipt($impUid: String!, $price: Float!, $tattooId: String!) {
 //     createReceipt(impUid: $impUid, price: $price, tattooId: $tattooId) {
