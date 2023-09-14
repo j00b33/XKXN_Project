@@ -123,9 +123,7 @@ export class TattooService {
       ...tattoo,
       isDone: true,
     };
-
     await this.tattooRepository.save(updateTattoo);
-
     return 'Marked Done';
   }
 
