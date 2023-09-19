@@ -66,13 +66,7 @@ export default function MainPageContainer() {
     localStorage.setItem("Recent View", JSON.stringify(recentData));
 
     router.push(`/board/${event.currentTarget.id}`);
-    console.log(
-      "🍄🍄🍄🍄🍄🍄🍄",
-      el,
-      "🍄🍄🍄🍄🍄🍄🍄",
-      event,
-      event.currentTarget.id
-    );
+    console.log("🍄", el, "🍄🍄", event, event.currentTarget.id);
   };
 
   const onClickTattooist = (event) => {
@@ -109,7 +103,15 @@ export default function MainPageContainer() {
                   <M.HeartIcon>
                     <FaRegHeart />
                   </M.HeartIcon>
-                  <M.BestLikes>{el.likes}</M.BestLikes>
+                  <M.BestLikes>
+                    {el.likes.length > 3
+                      ? Number(
+                          el.likes
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        )
+                      : el.likes}
+                  </M.BestLikes>
                 </M.BestLikeWrapper>
               </M.SingleTattoo>
             ))}

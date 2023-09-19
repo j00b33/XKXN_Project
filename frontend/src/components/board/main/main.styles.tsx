@@ -95,7 +95,7 @@ export const BestImage = styled.img`
   width: 120px;
   height: 120px;
 
-  box-shadow: 5px -5px #737373;
+  box-shadow: 5px -5px #272727;
 
   object-fit: cover;
 
