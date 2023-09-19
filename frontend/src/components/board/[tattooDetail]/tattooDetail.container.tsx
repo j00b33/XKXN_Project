@@ -297,7 +297,11 @@ export default function TattooDetailContainer() {
               <D.ToolIcon onClick={onClickLike}>
                 {isLiked ? <FaHeart /> : <FaRegHeart />}
               </D.ToolIcon>
-              <D.ToolText>{data?.fetchTattoo.likes} Likes</D.ToolText>
+              <D.ToolText>
+                {String(data?.fetchTattoo.likes).length > 3
+                  ? data?.fetchTattoo.likes.toLocaleString()
+                  : data?.fetchTattoo.likes}
+              </D.ToolText>
             </D.SingleTool>
 
             {data?.fetchTattoo.isDone ? null : (

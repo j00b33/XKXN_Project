@@ -34,16 +34,28 @@ export const Onebox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  border-radius: 20px 0px 20px 0px;
+
+  /* border-radius: 20px 0px 20px 0px; */
+  border-radius: 40px;
 
   width: 900px;
   height: 70px;
 
-  /* background-color: #4c4c4c; */
+  background-color: #dedede;
 
-  border: 1px solid #4c4c4c;
+  :hover {
+    /* background-color: #545454; */
+    background-color: #2c2c2c;
+    color: white;
+    width: 930px;
+    height: 75px;
+  }
 
-  margin-bottom: 21px;
+  transition: 0.4s;
+
+  /* border: 1px solid #4c4c4c; */
+
+  margin-bottom: 24px;
 `;
 
 export const UserImage = styled.img`
@@ -76,8 +88,6 @@ export const UserName = styled.div`
 
   cursor: pointer;
 
-  transition: 0.4s;
-
   :hover {
     color: #cb5555;
   }
@@ -97,9 +107,9 @@ export const ReviewButton = styled.div`
   justify-content: center;
 
   border: none;
-  background-color: #000000;
+  background-color: #cb5555;
   color: white;
-  border-radius: 10px;
+  border-radius: 30px;
 
   font-family: "Darker Grotesque";
   font-size: 15px;
@@ -111,7 +121,7 @@ export const ReviewButton = styled.div`
   cursor: pointer;
   :hover {
     /* background-color: #545454; */
-    background-color: #cb5555;
+    background-color: #dfa1a1;
     /* color: black; */
   }
 

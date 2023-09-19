@@ -106,6 +106,8 @@ export const TattooImage = styled.img`
   width: 250px;
   height: 250px;
 
+  border-radius: 5000px;
+
   overflow: auto;
   cursor: pointer;
 

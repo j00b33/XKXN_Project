@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin-bottom: 80px;
+  margin-bottom: 104px;
 `;
 
 export const Banner = styled.div`
@@ -85,7 +85,7 @@ export const BestContentWrapper = styled.div`
 export const SingleTattoo = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   height: 190px;
   width: 120px;
@@ -94,8 +94,9 @@ export const SingleTattoo = styled.div`
 export const BestImage = styled.img`
   width: 120px;
   height: 120px;
+  border-radius: 500px;
 
-  box-shadow: 5px -5px #272727;
+  /* box-shadow: 5px -5px #272727; */
 
   object-fit: cover;
 
@@ -148,7 +149,7 @@ export const BestTattooist = styled.div`
 export const SingleTattooist = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   height: 190px;
   width: 120px;

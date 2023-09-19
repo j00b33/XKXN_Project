@@ -22,25 +22,29 @@ export const MainWrapper = styled.div`
 `;
 
 export const RecentViewWrapper = styled.div`
-  background-color: #dedede;
+  background-color: #343434;
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  border-radius: 50px;
+
   width: 150px;
-  height: 570px;
+  height: 600px;
 `;
 
 export const RecentViewTitle = styled.div`
   font-family: "Darker Grotesque";
   font-weight: 400;
   font-size: 20px;
-  margin-top: 8px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: white;
 `;
 
 export const RecentContentWrapper = styled.div`
   width: 120px;
-  height: 510px;
+  height: 495px;
 
   display: flex;
   flex-direction: column;
@@ -51,15 +55,18 @@ export const RecentContentWrapper = styled.div`
 `;
 
 export const RecentImg = styled.img`
-  width: 120px;
-  height: 120px;
+  width: 105px;
+  height: 105px;
   border: none;
+
+  border-radius: 500px;
 
   object-fit: cover;
 
   cursor: pointer;
   :hover {
     filter: brightness(60%);
+    /* filter: blur(4px); */
   }
   transition: 0.4s;
 `;
@@ -69,6 +76,7 @@ export const Image = styled.img`
   height: 570px;
 
   object-fit: cover;
+  border-radius: 5000px;
 `;
 
 export const InfoWrapper = styled.div`
@@ -154,7 +162,7 @@ export const Tools = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  width: 270px;
+  width: 330px;
   height: 49px;
 `;
 
@@ -166,7 +174,7 @@ export const SingleTool = styled.div`
 
   cursor: pointer;
 
-  width: 60px;
+  width: 80px;
 
   color: #666666;
   :hover {
@@ -177,6 +185,7 @@ export const SingleTool = styled.div`
 
 export const ToolIcon = styled.div`
   font-size: 30px;
+  height: 40px;
 `;
 
 export const ToolText = styled.div`

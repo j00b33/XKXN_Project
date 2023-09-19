@@ -14,17 +14,24 @@ export const MainWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: cetner;
-  justify-content: space-between;
 
-  width: 946px;
+  width: 1112px;
   height: 500px;
 
   margin-bottom: 50px;
+
+  background-color: #565656;
+
+  border-radius: 300px;
 `;
 
 export const ImageWrapper = styled.div`
-  width: 480px;
-  height: 500px;
+  width: 450px;
+  height: 450px;
+  border-radius: 500px;
+
+  margin-top: 25px;
+  margin-left: 20px;
 
   background-color: #303030;
 
@@ -51,6 +58,8 @@ export const ContentWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  margin-left: 100px;
 `;
 
 export const TitleWrapper = styled.div`
@@ -65,32 +74,37 @@ export const Title = styled.div`
   font-weight: 400;
   font-size: 30px;
   margin-right: 10px;
+  color: white;
 `;
 
-export const TitleInput = styled.input`
-  font-family: "Darker Grotesque";
-  font-weight: 400;
-  font-size: 30px;
+// export const TitleInput = styled.input`
+//   font-family: "Darker Grotesque";
+//   font-weight: 400;
+//   font-size: 30px;
 
-  width: 120px;
-  height: 40px;
+//   width: 120px;
+//   height: 40px;
 
-  border: none;
-  border-bottom: 1px solid grey;
-`;
+//   border: none;
+//   border-bottom: 1px solid grey;
+// `;
 
 export const Detail = styled.input`
   width: 380px;
-  height: 200px;
+  height: 350px;
   margin-top: 20px;
+
+  position: relative;
 
   font-family: "Darker Grotesque";
   font-weight: 400;
-  font-size: 15px;
+  font-size: 20px;
 
   border: none;
 
-  color: #8d8d8d;
+  background-color: #565656;
+
+  color: white;
 `;
 
 export const Button = styled.div`
@@ -107,10 +121,12 @@ export const Button = styled.div`
   transition: 0.4s;
   :hover {
     color: white;
-    background-color: black;
+    background-color: #303030;
   }
+
+  border-radius: 50px;
 
   width: 350px;
   height: 40px;
-  border: 1px solid black;
+  background-color: #cecece;
 `;

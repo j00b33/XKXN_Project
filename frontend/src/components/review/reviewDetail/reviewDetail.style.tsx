@@ -22,8 +22,10 @@ export const MainWrapper = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 480px;
+  width: 500px;
   height: 500px;
+
+  border-radius: 500px;
 
   object-fit: cover;
 `;

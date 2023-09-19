@@ -98,18 +98,19 @@ export default function MainPageContainer() {
                   src={el.tattooImageUrl ? el.tattooImageUrl : "/default.png"}
                 />
                 <M.BestName>{el.name}</M.BestName>
-                <M.BestId id={el.price}>$ {el.price}</M.BestId>
+                <M.BestId id={el.price}>
+                  ${" "}
+                  {String(el.price).length > 3
+                    ? el.price.toLocaleString()
+                    : el.price}
+                </M.BestId>
                 <M.BestLikeWrapper>
                   <M.HeartIcon>
                     <FaRegHeart />
                   </M.HeartIcon>
                   <M.BestLikes>
-                    {el.likes.length > 3
-                      ? Number(
-                          el.likes
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                        )
+                    {String(el.likes).length > 3
+                      ? el.likes.toLocaleString()
                       : el.likes}
                   </M.BestLikes>
                 </M.BestLikeWrapper>
@@ -141,12 +142,8 @@ export default function MainPageContainer() {
                     <FaRegHeart />
                   </M.HeartIcon>
                   <M.BestLikes>
-                    {el.likes.length > 3
-                      ? Number(
-                          el.likes
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                        )
+                    {String(el.likes).length > 3
+                      ? el.likes.toLocaleString()
                       : el.likes}
                   </M.BestLikes>
                 </M.BestLikeWrapper>

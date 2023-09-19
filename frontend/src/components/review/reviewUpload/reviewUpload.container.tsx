@@ -78,8 +78,7 @@ export default function ReviewUploadContainer() {
 
         <U.ContentWrapper>
           <U.TitleWrapper>
-            <U.Title>Review of Tattoooist </U.Title>
-            <U.Title>{tattooistName}</U.Title>
+            <U.Title>Review for {tattooistName}</U.Title>
           </U.TitleWrapper>
           <Rate onChange={onChangeRate} value={rate} />
           <U.Detail
